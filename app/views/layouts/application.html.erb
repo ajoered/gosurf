@@ -9,28 +9,72 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-          <% if user_signed_in? %>
-          <a class="navbar-brand" href="#">GOSURF</a>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Find Trips</a></li>
-          <li><a href="#">Create Trips</a></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, method: 'DELETE' %></li>
-        </ul>
-          <% else %>
-          <a class="navbar-brand" href="#">GOSURF</a>
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Find Trips</a></li>
-              <li><a href="#">Create Trips</a></li>
-              <li><%= link_to 'Sign up', new_user_registration_path %></li>
-              <li><%= link_to 'Sign in', new_user_session_path %></li>
-            </ul>
-          <% end %>
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <% if user_signed_in? %>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="/">GOSURF</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">Home</a>
+                    </li>
+                    <li>
+                        <a href="#services">Find Trips</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Create Trips</a>
+                    </li>
+                    <li>
+                      <%= link_to 'Sign out', destroy_user_session_path, method: 'DELETE' %>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+            <% else %>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="/">GOSURF</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">Home</a>
+                    </li>
+                    <li>
+                        <a href="#services">Find Trips</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Create Trips</a>
+                    </li>
+                    <li>
+                      <%= link_to 'Sign up', new_user_registration_path %>
+                    </li>
+                    <li>
+                      <%= link_to 'Sign in', new_user_session_path %>
+                    </li>
+                </ul>
+            </div>
+            <% end %>
         </div>
+        <!-- /.container -->
     </nav>
+
     <div>
       <%= yield %>
     </div>

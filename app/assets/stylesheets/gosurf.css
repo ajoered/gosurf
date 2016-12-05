@@ -1,8 +1,51 @@
 body {
-  padding-top: 70px;
+  padding-top: 50px;
   height: 100%;
   width: 100%;
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.intro-header {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(header.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+
+.intro-message {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 }
 
 p {
@@ -15,6 +58,10 @@ section {
   padding: 100px 0;
 }
 
-.header-content-inner {
-  margin-left: 70px;
+.map {
+  padding: 100px;
+}
+
+.search_button {
+  margin: 30px;
 }
