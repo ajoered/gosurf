@@ -1,0 +1,20 @@
+body {
+  padding-top: 70px;
+  height: 100%;
+  width: 100%;
+  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+section {
+  padding: 100px 0;
+}
+
+.header-content-inner {
+  margin-left: 70px;
+}
