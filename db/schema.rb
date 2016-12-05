@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205102322) do
+
+ActiveRecord::Schema.define(version: 20161205131409) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "trip_id"
+    t.integer  "user_id"
+    t.boolean  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "trips", force: :cascade do |t|
     t.string   "level"
@@ -29,13 +39,6 @@ ActiveRecord::Schema.define(version: 20161205102322) do
     t.datetime "updated_at",     null: false
     t.integer  "owner_id"
     t.index ["owner_id"], name: "index_trips_on_owner_id", using: :btree
-  end
-
-  create_table "trips_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "trip_id"
-    t.index ["trip_id"], name: "index_trips_users_on_trip_id", using: :btree
-    t.index ["user_id"], name: "index_trips_users_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

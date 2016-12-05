@@ -1,4 +1,5 @@
 class Trip < ApplicationRecord
-  has_and_belongs_to_many :users
+  has_many :requests
+  has_many :users, through: :requests
   belongs_to :owner, class_name: 'User'
 end
