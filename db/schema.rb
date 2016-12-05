@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161205131409) do
-
+ActiveRecord::Schema.define(version: 20161205140921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +18,9 @@ ActiveRecord::Schema.define(version: 20161205131409) do
   create_table "requests", force: :cascade do |t|
     t.integer  "trip_id"
     t.integer  "user_id"
-    t.boolean  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "status",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "trips", force: :cascade do |t|
@@ -59,6 +57,4 @@ ActiveRecord::Schema.define(version: 20161205131409) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "trips_users", "trips"
-  add_foreign_key "trips_users", "users"
 end
