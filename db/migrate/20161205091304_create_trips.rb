@@ -10,7 +10,6 @@ class CreateTrips < ActiveRecord::Migration[5.0]
       t.integer :max_users
       t.integer :space_material
       t.string :description
-
       t.timestamps
     end
   end
