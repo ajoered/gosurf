@@ -6,13 +6,19 @@ class TripsController < ApplicationController
   end
 
   def search
-    @trips = Trip.find_by(country: params[:country])
-    render json: @trips
+    @country = params[:country]
+    @trips = Trip.find_by(country: @country)
+	  unless @trips
+	    render json: {error: "No trips found"},
+	    status: 404
+	    return
+	  end
+	  render json: @trips
   end
 
-  private
-
-  def trip_params
-    params.require(:country).permit(:start_date, :description)
-  end
+  # private
+  #
+  # def trip_params
+  #   params.require(:country).permit(:start_date, :description)
+  # end
 end
