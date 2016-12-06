@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="intro-message">
-          <img src="/assets/gosurf.jpg" alt="GOSURF">
+          <!-- <img src="/assets/gosurf.jpg" alt="GOSURF"> -->
           <h3>We make it easy to go surfing.</h3>
           <hr class="intro-divider">
           <ul class="list-inline intro-social-buttons">
@@ -25,13 +25,15 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center">
         <h2 class="section-heading">Search for a trip</h2>
-        <hr class="light">
+        <hr>
         <p class="text-faded"></p>
         <div class="search_form">
           <%= form_tag :method => 'get', class: 'input-group'  do %>
-          <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search for...' %>
+          <%= text_field_tag :location, params[:location], class: 'form-control', placeholder: 'Search by location...' %>
+          <%= text_field_tag :start_date, params[:start_date], class: 'form-control', placeholder: 'Start date...' %>
+          <%= text_field_tag :end_date, params[:end_date], class: 'form-control', placeholder: 'End date...' %>
           <span class="input-group-btn">
-            <%= submit_tag "search", class: "page-scroll btn btn-default btn-xl sr-button search_button" %>
+            <%= submit_tag "search", class: "page-scroll btn btn-default btn-xl sr-button search_button", id: "search_button" %>
           </span>
           <% end %>
         </div>
@@ -46,6 +48,7 @@
       <div class="col-lg-2">
       </div>
       <div class="col-lg-10 map">
+        <img src="" id="map">
       </div>
     </div>
   </div>

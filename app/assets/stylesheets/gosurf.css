@@ -21,7 +21,7 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(header.jpg) no-repeat center center;
+    background: url(headerjohn4.jpg) no-repeat center center;
     background-size: cover;
 }
 
@@ -64,4 +64,8 @@ section {
 
 .search_button {
   margin: 30px;
+}
+
+.form-control {
+  margin: 10px;
 }
