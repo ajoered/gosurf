@@ -7,13 +7,17 @@ class TripsController < ApplicationController
 
   def search
     @country = params[:country]
-    @trips = Trip.find_by(country: @country)
+    @trips = []
+    @trips = Trip.where(country: @country)
 	  unless @trips
 	    render json: {error: "No trips found"},
 	    status: 404
 	    return
 	  end
 	  render json: @trips
+  end
+
+  def new
   end
 
   # private

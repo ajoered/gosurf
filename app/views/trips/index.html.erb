@@ -1,3 +1,9 @@
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqBfeC-s5-oWg9BdzPNA6J_oNp5nID06g&callback=initMap"
+    async defer></script> -->
+</head>
 <section class="intro-header">
   <div class="container">
     <div class="row">
@@ -40,18 +46,15 @@
   </div>
 </section>
 
-<section class="results" id="results">
+<section class="results">
   <div class="container">
     <div class="row">
       <div class="col-lg-2">
       </div>
-      <div class="col-lg-10 map">
-        <ul><% @trips.each do |trip| %>
-            <li><%= trip.destination %></li>
-            <li><%= trip.description %></li>
-          <% end %>
-        </ul>
+      <div class="col-lg-10 map" id="results">
         <img src="" id="map">
+        <ul id="ul">
+        </ul>
       </div>
     </div>
   </div>
