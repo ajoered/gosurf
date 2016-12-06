@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :requests
   has_many :trips, through: :requests
+  has_many :trips
 
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

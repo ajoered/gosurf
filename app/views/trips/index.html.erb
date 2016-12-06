@@ -28,7 +28,7 @@
         <hr>
         <p class="text-faded"></p>
         <div class="search_form">
-          <%= form_tag :method => 'get', class: 'input-group'  do %>
+          <%= form_tag class: 'input-group'  do %>
           <%= text_field_tag :location, params[:location], class: 'form-control', placeholder: 'Search by location...' %>
           <%= text_field_tag :start_date, params[:start_date], class: 'form-control', placeholder: 'Start date...' %>
           <%= text_field_tag :end_date, params[:end_date], class: 'form-control', placeholder: 'End date...' %>
@@ -48,7 +48,11 @@
       <div class="col-lg-2">
       </div>
       <div class="col-lg-10 map">
-        <p></p>
+        <ul><% @trips.each do |trip| %>
+            <li><%= trip.destination %></li>
+            <li><%= trip.description %></li>
+          <% end %>
+        </ul>
         <img src="" id="map">
       </div>
     </div>
