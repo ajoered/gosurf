@@ -1,0 +1,46 @@
+<section class="form-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Hey <%= current_user.name %>! Going surfing? </p>
+        <%= form_for [@trip] do |f| %>
+        	<%= f.label :level %>
+        	<%= f.text_field :level %>
+        	<br>
+        	<%= f.label :kind_of_trip %>
+        	<%= f.text_field :kind_of_trip %>
+        	<br>
+        	<%= f.label :origin %>
+        	<%= f.text_field :origin %>
+          <br>
+        	<%= f.label :country %>
+        	<%= f.text_field :country %>
+        	<br>
+        	<%= f.label :destination %>
+        	<%= f.text_field :destination %>
+        	<br>
+          <%= f.label :start_date %>
+          <%= f.date_field :start_date %>
+          <br>
+          <%= f.label :finish_date %>
+          <%= f.date_field :finish_date %>
+          <br>
+          <%= f.label :max_users %>
+          <%= f.text_field :max_users %>
+          <br>
+          <%= f.label :space_material %>
+          <%= f.text_field :space_material %>
+          <br>
+          <%= f.label :description %>
+          <%= f.text_area :description %>
+          <br>
+          <%= f.label :space_material %>
+          <%= f.text_field :space_material %>
+          <br>
+        	<%= f.button %>
+        <% end %>
+
+        </div>
+      </div>
+    </div>
+  </section>
