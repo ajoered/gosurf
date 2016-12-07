@@ -1,4 +1,73 @@
-<h2><%= current_user.name %>!</h2>
-<p>
-<strong>Email:</strong> <%= current_user.email %>
-</p>
+<div class="container">
+  <div class="row page-header">
+    <h2>Hey <%= current_user.name %>!</h2>
+    <h2>Hey <%= current_user.requests.trip_id %>!</h2>
+  </div>
+
+  <!-- Profile table -->
+  <div class="row">
+    <ul class="list-group">
+      <a href="/profile" class="list-group-item active">
+        Profile
+      </a>
+      <a class="list-group-item"><strong>Name:</strong> <%= current_user.name %></a>
+      <a class="list-group-item"><strong>E-mail:</strong> <%= current_user.email %></a>
+    </ul>
+    <button class="btn btn-default btn-sm pull-left"><%= link_to 'Edit', edit_user_registration_path %></button>
+  </div>
+
+  <!-- Trips section -->
+  <div class="row page-header">
+    <h2>Your Trips</h2>
+  </div>
+
+  <div class="row">
+    <h4>These are the trips you have created</h4>
+  </div>
+  <!-- Created trips -->
+  <% @trips.each do |trip| %>
+  <div class="row created-trips">
+    <div class="panel panel-default panel-primary">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Trip to <%= trip.destination %>, <%= trip.country %></div>
+      <div class="panel-body">
+        <p><strong>Departing from:</strong> <%= trip.origin %></p>
+        <p><strong>Kind of trip:</strong> <%= trip.kind_of_trip %></p>
+        <p><strong>Departing:</strong> <%= trip.start_date %></p>
+        <p><strong>Coming back:</strong> <%= trip.finish_date %></p>
+        <p><strong>Empty seats:</strong> <%= trip.max_users %></p>
+        <p><strong>Board Space:</strong> <%= trip.space_material %></p>
+        <p><strong>Description:</strong> <%= trip.description %></p>
+      </div>
+
+      <!-- user requests -->
+      <% if trip.requests.length > 0 %>
+      <% trip.requests.each do |request| %>
+      <div class="panel-body">
+        <h4>The following users have requested to join:</h4>
+      </div>
+      <ul class="list-group">
+        <!-- user request -->
+        <a class="list-group-item">
+          <strong><%= request.user.name %></strong>
+          <button class="btn btn-warning btn-sm pull-right btn-user">Accept</button>
+          <button data-toggle="collapse" data-target="#userone" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
+          <div id="userone" class="collapse">
+            <p><strong>Name:</strong> <%= request.user.email %></p>
+            <p><strong>Email:</strong> <%= request.user.email %></p>
+          </div>
+          <div class="clearfix"></div>
+        </a>
+      </ul>
+      <% end %>
+      <% else %>
+      <div class="panel-body">
+        <h4>No one wants to go surfing with you... yet!</h4>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+  <p><% current_user.requests %></p>
+
+</div>

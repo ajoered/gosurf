@@ -43,6 +43,20 @@ class TripsController < ApplicationController
         	redirect_to root_path
   end
 
+  def destroy
+      @trip = Trip.find(params[:id])
+    if current_user = @trip.user
+      @trip.destroy
+      respond_to do |format|
+        format.html { redirect_to profile_path, notice: 'Trip was successfully destroyed.' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to profile_path, notice: 'Trip was successfully destroyed.' }
+      end
+    end
+  end
+
   private
 
   def signed_in_user

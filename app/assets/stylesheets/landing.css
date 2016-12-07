@@ -1,23 +1,19 @@
-body {
-  padding-top: 50px;
+html, body {
+  padding-top: 25px;
   height: 100%;
   width: 100%;
-  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 
-#map {
+.map_area {
+  padding: 0px 0;
   height: 100%;
+  width:100%;
+  visibility: hidden;
   }
 
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+#map {
+  height: 400px;
+  width: 100%;
 }
 
 .intro-header {
@@ -62,14 +58,15 @@ section {
   padding: 100px 0;
 }
 
-.map {
-  padding: 100px;
-}
-
 .search_button {
   margin: 30px;
 }
 
 .form-control {
   margin: 10px;
+}
+
+.navbar-footer {
+  margin-bottom: 0px;
+  margin-top: 10px;
 }

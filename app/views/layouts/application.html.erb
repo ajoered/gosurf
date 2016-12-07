@@ -3,7 +3,7 @@
 <head>
   <title>Gosurf</title>
   <%= csrf_meta_tags %>
-  
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
@@ -30,7 +30,7 @@
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="#/">Find Trips</a>
+            <a href="#/" class="find_trip">Find Trips</a>
           </li>
           <li>
             <a href="/trips/new">Create Trips</a>
@@ -61,7 +61,7 @@
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="#/">Find Trips</a>
+            <a href="#/" class="find_trip">Find Trips</a>
           </li>
           <li>
             <a href="/trips/new">Create Trips</a>
@@ -81,6 +81,18 @@
 
   <div>
     <%= yield %>
+  </div>
+
+  <!-- footer -->
+  <div class="navbar navbar-default navbar-footer">
+    <div class="container">
+      <p class="navbar-text pull-left">© 2016 - Site Built By @ajoered.
+      </p>
+
+      <a href="https://github.com/alvarojoered" class="navbar-btn btn-default btn pull-right">Github</a>
+    </div>
+
+
   </div>
 </body>
 </html>
