@@ -143,7 +143,7 @@
             <p><strong>Board Space:</strong> <%= trip.space_material %></p>
             <p><strong>Description:</strong> <%= trip.description %></p>
             <% @status = trip.requests.find_by(user_id: current_user.id).status %>
-            <% if @status = false %>
+            <% if @status == false %>
             <p><strong>Status:</strong> Not accepted Yet </p>
             <% else %>
             <p><strong>Status:</strong> Accepted! You're going to <%= trip.destination %>. Please get in touch with <%= trip.user.name %>, his details are below. </p>
