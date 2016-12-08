@@ -10,4 +10,5 @@ class Request < ApplicationRecord
   # def approve!
   #   update(status: true)
   # end
+   
 end
