@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  unless Rails.env.developtment?
+    protect_from_forgery with: :exception
+  end
+  
   before_action :configure_permitted_parameters, if: :devise_controller?
 
 protected

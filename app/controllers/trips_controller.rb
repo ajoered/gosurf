@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
- skip_before_action :verify_authenticity_token
+ skip_before_action :verify_authenticity_token, only: [:search]
 
   def index
     @trips = Trip.all
@@ -7,7 +7,6 @@ class TripsController < ApplicationController
 
   def search
     @country = params[:country]
-    @trips = []
     @trips = Trip.where(country: @country)
 	  unless @trips
 	    render json: {error: "No trips found"},
@@ -55,9 +54,6 @@ class TripsController < ApplicationController
         format.html { redirect_to profile_path, notice: 'Trip was successfully destroyed.' }
       end
     end
-  end
-
-  def accept
   end
 
   private

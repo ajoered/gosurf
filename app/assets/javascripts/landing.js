@@ -1,7 +1,9 @@
-$(document).on('ready', function (){
+$(document).on('ready', initialize);
+$(document).on('turbolinks:load', initialize);
 
+function initialize() {
 	$('#search_button').on('click', fetchTrips);
-});
+}
 
 function initMap() {
   var myLatLng = {lat: 40.468, lng: -3.652};
