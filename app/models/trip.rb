@@ -6,5 +6,12 @@ class Trip < ApplicationRecord
   validates :origin,      presence: true, length: { maximum: 250 }
 	validates :start_date, 	presence: true
   validates :user, 	      presence: true
-	#rest
+
+  def max_requests_reached
+    @requests = @trip.requests.select { |request| request.status = true }
+    if (@requests.length > @trip.max_users)
+      errors.add(:base, 'Exceeded user limit')
+    end
+  end
+
 end

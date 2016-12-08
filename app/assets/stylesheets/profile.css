@@ -1,3 +1,11 @@
 .btn-user {
   margin-left: 10px;
 }
+
+.accept-button {
+  margin-left: 10px;
+}
+
+.user-accepted {
+  background-color: rgb(234, 250, 234);
+}
