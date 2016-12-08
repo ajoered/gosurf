@@ -3,7 +3,8 @@ before_action :authenticate_user!
 
   def profile
     @trips = current_user.trips
-    render 'users/profile'
+    @requests = current_user.requests
+    @requested_trips = @requests.map(&:trip)
   end
 
   private

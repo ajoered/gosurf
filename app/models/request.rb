@@ -6,4 +6,8 @@ class Request < ApplicationRecord
     self.status = true
     self.save
   end
+  #
+  # def approve!
+  #   update(status: true)
+  # end
 end

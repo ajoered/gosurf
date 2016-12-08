@@ -17,9 +17,9 @@ function initMap() {
 };
 
 function fetchTrips(event) {
+	event.preventDefault();
 	$('.map_area').css('visibility', 'visible');
 	initMap();
-  event.preventDefault();
   var country = {country: $('#country').val()};
 
   $.ajax({

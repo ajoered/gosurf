@@ -1,7 +1,6 @@
 <div class="container">
   <div class="row page-header">
     <h2>Hey <%= current_user.name %>!</h2>
-    <h2>Hey <%= current_user.requests.trip_id %>!</h2>
   </div>
 
   <!-- Profile table -->
@@ -22,9 +21,10 @@
   </div>
 
   <div class="row">
-    <h4>These are the trips you have created</h4>
+    <h4>Created Trips</h4>
   </div>
   <!-- Created trips -->
+  <% if @trips.length > 0 %>
   <% @trips.each do |trip| %>
   <div class="row created-trips">
     <div class="panel panel-default panel-primary">
@@ -33,6 +33,7 @@
       <div class="panel-body">
         <p><strong>Departing from:</strong> <%= trip.origin %></p>
         <p><strong>Kind of trip:</strong> <%= trip.kind_of_trip %></p>
+        <p><strong>Price:</strong> <%= trip.price %></p>
         <p><strong>Departing:</strong> <%= trip.start_date %></p>
         <p><strong>Coming back:</strong> <%= trip.finish_date %></p>
         <p><strong>Empty seats:</strong> <%= trip.max_users %></p>
@@ -49,12 +50,16 @@
       <ul class="list-group">
         <!-- user request -->
         <a class="list-group-item">
-          <strong><%= request.user.name %></strong>
-          <button class="btn btn-warning btn-sm pull-right btn-user">Accept</button>
-          <button data-toggle="collapse" data-target="#userone" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
-          <div id="userone" class="collapse">
-            <p><strong>Name:</strong> <%= request.user.email %></p>
-            <p><strong>Email:</strong> <%= request.user.email %></p>
+          <div>
+            <button class="btn btn-warning btn-sm pull-right accept-button" id="accept<%=request.id%>" data-id="<%=request.id%>">Accept</button>
+            <button data-toggle="collapse" data-target="#view<%= request.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
+            <p><strong><%= request.user.name %></strong></p>
+          </div>
+
+
+          <div id="view<%=request.id%>" class="collapse">
+            <div class="clearfix"></div><br>
+            <p><strong>Comments:</strong> <%= request.comment %></p>
           </div>
           <div class="clearfix"></div>
         </a>
@@ -66,8 +71,59 @@
       </div>
       <% end %>
     </div>
+    <% end %>
+  </div>
+  <% else %>
+  <div class="panel-body">
+    <p>You have not created any trips...</p>
+    <a href="/trips/new" class="btn btn-primary pull-left" role="button">Create Trip</a>
   </div>
   <% end %>
-  <p><% current_user.requests %></p>
 
+  <div class="container requested-trips">
+    <div class="row">
+      <h4>Requested Trips</h4>
+    </div>
+  </div>
+  <!-- Requested trips -->
+  <% if @requested_trips %>
+  <% @requested_trips.each do |trip| %>
+  <div class="row created-trips">
+    <div class="panel panel-default panel-primary">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Trip to <%= trip.destination %>, <%= trip.country %></div>
+      <div class="panel-body">
+        <p><strong>Departing from:</strong> <%= trip.origin %></p>
+        <p><strong>Kind of trip:</strong> <%= trip.kind_of_trip %></p>
+        <p><strong>Departing:</strong> <%= trip.start_date %></p>
+        <p><strong>Coming back:</strong> <%= trip.finish_date %></p>
+        <p><strong>Empty seats:</strong> <%= trip.max_users %></p>
+        <p><strong>Board Space:</strong> <%= trip.space_material %></p>
+        <p><strong>Description:</strong> <%= trip.description %></p>
+      </div>
+      <div class="panel-body">
+        <h4>Created by</h4>
+      </div>
+      <ul class="list-group">
+        <!-- user request -->
+        <a class="list-group-item">
+          <strong><%= trip.user.name %></strong>
+          <button class="btn btn-warning btn-sm pull-right btn-user">Accept</button>
+          <button data-toggle="collapse" data-target="#<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
+          <div id="<%= trip.id %>" class="collapse">
+            <p><strong>Name:</strong> <%= trip.user.name %></p>
+            <p><strong>Email:</strong> <%= trip.user.email %></p>
+          </div>
+          <div class="clearfix"></div>
+        </a>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+  <% else %>
+  <div class="container panel-body">
+    <p>You have not requested to join any trips</p>
+    <a href="/" class="btn btn-primary pull-left" role="button">Find Trips</a>
+  </div>
+  <% end %>
 </div>
