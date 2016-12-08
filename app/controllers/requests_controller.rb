@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
 
   def approve
     @request = Request.find_by(id: params[:id])
-    @request.approve
+    @request.approve!
   end
 
 end
