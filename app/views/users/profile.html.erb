@@ -11,6 +11,8 @@
       </a>
       <a class="list-group-item"><strong>Name:</strong> <%= current_user.name %></a>
       <a class="list-group-item"><strong>E-mail:</strong> <%= current_user.email %></a>
+      <a class="list-group-item"><strong>Level:</strong> <%= current_user.level %></a>
+      <a class="list-group-item"><strong>Bio:</strong> <%= current_user.bio %></a>
     </ul>
     <button class="btn btn-default btn-sm pull-left"><%= link_to 'Edit', edit_user_registration_path %></button>
   </div>
@@ -143,7 +145,7 @@
             <p><strong>Board Space:</strong> <%= trip.space_material %></p>
             <p><strong>Description:</strong> <%= trip.description %></p>
             <% @status = trip.requests.find_by(user_id: current_user.id).status %>
-            <% if @status = false %>
+            <% if @status == false %>
             <p><strong>Status:</strong> Not accepted Yet </p>
             <% else %>
             <p><strong>Status:</strong> Accepted! You're going to <%= trip.destination %>. Please get in touch with <%= trip.user.name %>, his details are below. </p>
@@ -161,6 +163,7 @@
               <div id="<%= trip.id %>" class="collapse">
                 <p><strong>Name:</strong> <%= trip.user.name %></p>
                 <p><strong>Email:</strong> <%= trip.user.email %></p>
+                <p><strong>Phone:</strong> <%= trip.user.phone_number %></p>
               </div>
               <div class="clearfix"></div>
             </a>
