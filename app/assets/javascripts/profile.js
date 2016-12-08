@@ -3,6 +3,6 @@ $(document).on('ready', function (){
 });
 
 function acceptRequest(event) {
-  alert(event.id)
-  console.log(event)
+  id = event.toElement.id;
+  console.log(id);
 };

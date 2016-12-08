@@ -57,6 +57,9 @@ class TripsController < ApplicationController
     end
   end
 
+  def accept
+  end
+
   private
 
   def signed_in_user

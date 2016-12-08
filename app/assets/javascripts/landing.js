@@ -1,4 +1,5 @@
 $(document).on('ready', function (){
+
 	$('#search_button').on('click', fetchTrips);
 });
 

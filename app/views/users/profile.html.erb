@@ -51,7 +51,7 @@
         <!-- user request -->
         <a class="list-group-item">
           <div>
-            <button class="btn btn-warning btn-sm pull-right accept-button" id="accept<%=request.id%>" data-id="<%=request.id%>">Accept</button>
+            <button class="btn btn-warning btn-sm pull-right accept-button" id="<%=request.id%>" data-id="<%=request.id%>">Accept</button>
             <button data-toggle="collapse" data-target="#view<%= request.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
             <p><strong><%= request.user.name %></strong></p>
           </div>
@@ -108,7 +108,6 @@
         <!-- user request -->
         <a class="list-group-item">
           <strong><%= trip.user.name %></strong>
-          <button class="btn btn-warning btn-sm pull-right btn-user">Accept</button>
           <button data-toggle="collapse" data-target="#<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
           <div id="<%= trip.id %>" class="collapse">
             <p><strong>Name:</strong> <%= trip.user.name %></p>
