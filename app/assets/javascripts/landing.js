@@ -6,7 +6,7 @@ function initialize() {
 
 function fetchTrips(event) {
 	event.preventDefault();
-	$('.map_area').css('visibility', 'visible');
+	$('.map-area').css('visibility', 'visible');
   var country = {country: $('#country').val()};
 
   $.ajax({
@@ -22,19 +22,22 @@ function getLatLng(response){
   var tripsArray = response;//assign response to variable
   var geocoder   = new google.maps.Geocoder();
 	var countryCoordinatesArray = [];
-
+	console.log(tripsArray);
 	tripsArray.forEach(function(trip) {//loop over trip array
-		console.log(trip);
 		var tripCoordinates = { //create empty object to be pushed into empty array
-			origin: null,
-			destination: null
+			origin: undefined,
+			destination: undefined
 		};
 		geocoder.geocode( { //get origin coordinates for trip
 	    'address': trip.origin},
 	    function(results, status) {
-				var myLatLngOrigin;
+				console.log('viernes')
+				debugger
 	      if (status == google.maps.GeocoderStatus.OK) {
-					tripCoordinates.origin = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()} //assign result to tripCoordinates
+					tripCoordinates.origin = {
+						lat: results[0].geometry.location.lat(),
+						lng: results[0].geometry.location.lng()
+					} //assign result to tripCoordinates
 	      } else {
 	        alert("Something got wrong " + status);
 	      }
@@ -43,28 +46,31 @@ function getLatLng(response){
 		geocoder.geocode( { //get origin coordinates for trip
 			'address': trip.destination},
 			function(results, status) {
-				var myLatLngDestination;
+				// var myLatLngDestination;
 				if (status == google.maps.GeocoderStatus.OK) {
-					tripCoordinates.destination = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()} //assign result to tripCoordinates
+					tripCoordinates.destination = {
+						lat: results[0].geometry.location.lat(),
+						lng: results[0].geometry.location.lng()
+					} //assign result to tripCoordinates
 				} else {
 					alert("Something got wrong " + status);
 				}
 		});
 		countryCoordinatesArray.push(tripCoordinates) //push result into array
-		console.log("geocoder", countryCoordinatesArray)
 	});
+	console.log('primer debugger', countryCoordinatesArray);
 	initMap(countryCoordinatesArray)
 };
 
 function initMap(coordinateArray) {
-	console.log("initmap", coordinateArray);
-	var tripCoordinateArray = coordinateArray
+
+	// console.log("initmap", tripCoordinateArray);
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 6,
-    center: tripCoordinateArray[0].origin
+    center: coordinateArray[0].origin
   });
 
-	tripCoordinateArray.forEach(function(trip) {
+	coordinateArray.forEach(function(trip) {
 		var flightPlanCoordinates = [];
 
 		flightPlanCoordinates.unshift(trip.destination);
