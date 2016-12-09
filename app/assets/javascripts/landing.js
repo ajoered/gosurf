@@ -21,27 +21,38 @@ function fetchTrips(event) {
 function getLatLng(response){
   var tripsArray = response;
   var geocoder   = new google.maps.Geocoder();
-  geocoder.geocode( {
+	var myLatLngOriginDestination = [];
+
+	geocoder.geocode( { //get origin coordinates
     'address': tripsArray[0].origin},
     function(results, status) {
-      var position = [];
-			var myLatLng;
+			var myLatLngOrigin;
       if (status == google.maps.GeocoderStatus.OK) {
-        position[0] = results[0].geometry.location.lat();
-        position[1] = results[0].geometry.location.lng();
-				myLatLng = {lat: position[0], lng: position[1]}
+				myLatLngOrigin = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
       } else {
         alert("Something got wrong " + status);
       }
-
-		
-      initMap(myLatLng);
+			myLatLngOriginDestination.push(myLatLngOrigin)
   });
+
+	geocoder.geocode( { //get destination coordinates
+		'address': tripsArray[0].destination},
+		function(results, status) {
+			var myLatLngDestination;
+			if (status == google.maps.GeocoderStatus.OK) {
+				myLatLngDestination = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+			} else {
+				alert("Something got wrong " + status);
+			}
+			myLatLngOriginDestination.push(myLatLngDestination)
+			console.log(myLatLngOriginDestination);
+			initMap(myLatLngOriginDestination); //init map with array of origin and dest.
+	});
 };
 
 
-function initMap(position) {
-	var myLatLng = position;
+function initMap(positions) {
+	var myLatLng = positions;
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 5,
