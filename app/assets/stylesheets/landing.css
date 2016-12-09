@@ -4,6 +4,36 @@ html, body {
   width: 100%;
 }
 
+.topnav {
+    font-size: 14px;
+    background-color: rgb(6, 6, 8);
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+
+#search {
+  background-color: #286090;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+}
+
 .map_area {
   padding: 0px 0;
   height: 100%;
@@ -21,8 +51,8 @@ html, body {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(headerjohn4.jpg) no-repeat center center;
-    background-size: cover;
+    /*background: url(headerjohn4.jpg) no-repeat center center;*/
+    /*background-size: cover;*/
 }
 
 
@@ -48,11 +78,11 @@ html, body {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 }
 
-p {
+/*p {
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 20px;
-}
+}*/
 
 section {
   padding: 100px 0;
@@ -69,4 +99,9 @@ section {
 .navbar-footer {
   margin-bottom: 0px;
   margin-top: 10px;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
 }
