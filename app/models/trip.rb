@@ -7,6 +7,9 @@ class Trip < ApplicationRecord
 	validates :start_date, 	presence: true
   validates :user, 	      presence: true
 
+  geocoded_by :origin
+  after_validation :geocode
+
   def max_requests_reached
     @requests = @trip.requests.select { |request| request.status = true }
     if (@requests.length > @trip.max_users)
