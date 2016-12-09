@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209184652) do
+ActiveRecord::Schema.define(version: 20161209191006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,13 +35,15 @@ ActiveRecord::Schema.define(version: 20161209184652) do
     t.integer  "max_users"
     t.integer  "space_material"
     t.string   "description"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "user_id"
     t.string   "country"
     t.integer  "price"
     t.float    "latitude"
     t.float    "longitude"
+    t.float    "destination_lat"
+    t.float    "destination_lng"
     t.index ["user_id"], name: "index_trips_on_user_id", using: :btree
   end
 
