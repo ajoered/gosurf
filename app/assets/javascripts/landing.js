@@ -22,50 +22,71 @@ function getLatLng(response){
   var tripsArray = response;
   var geocoder   = new google.maps.Geocoder();
 	var myLatLngOriginDestination = [];
+	var country = {
+		origin: null,
+		destination: null
+	};
+	
+		geocoder.geocode( { //get origin coordinates
+	    'address': tripsArray[0].origin},
+	    function(results, status) {
+				var myLatLngOrigin;
+	      if (status == google.maps.GeocoderStatus.OK) {
+					myLatLngOrigin = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+	      } else {
+	        alert("Something got wrong " + status);
+	      }
+				myLatLngOriginDestination.push(myLatLngOrigin)
+	  });
 
-	geocoder.geocode( { //get origin coordinates
-    'address': tripsArray[0].origin},
-    function(results, status) {
-			var myLatLngOrigin;
-      if (status == google.maps.GeocoderStatus.OK) {
-				myLatLngOrigin = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
-      } else {
-        alert("Something got wrong " + status);
-      }
-			myLatLngOriginDestination.push(myLatLngOrigin)
-  });
+		geocoder.geocode( { //get destination coordinates
+			'address': tripsArray[0].destination},
+			function(results, status) {
+				var myLatLngDestination;
+				if (status == google.maps.GeocoderStatus.OK) {
+					myLatLngDestination = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+				} else {
+					alert("Something got wrong " + status);
+				}
+				myLatLngOriginDestination.push(myLatLngDestination)
+				console.log(myLatLngOriginDestination);
+				initMap(myLatLngOriginDestination);
+		});
 
-	geocoder.geocode( { //get destination coordinates
-		'address': tripsArray[0].destination},
-		function(results, status) {
-			var myLatLngDestination;
-			if (status == google.maps.GeocoderStatus.OK) {
-				myLatLngDestination = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
-			} else {
-				alert("Something got wrong " + status);
-			}
-			myLatLngOriginDestination.push(myLatLngDestination)
-			console.log(myLatLngOriginDestination);
-			initMap(myLatLngOriginDestination); //init map with array of origin and dest.
-	});
 };
 
+// function getCoordinates(location) {
+// 	geocoder.geocode( {
+// 		'address': location},
+// 		function(results, status) {
+// 			var myLatLngOrigin;
+// 			if (status == google.maps.GeocoderStatus.OK) {
+// 				myLatLngOrigin = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+// 			} else {
+// 				alert("Something got wrong " + status);
+// 			}
+// 			return myLatLngOrigin;
+// 	});
+// }
 
 function initMap(positions) {
-	var myLatLng = positions;
+	console.log(positions)
+	var myLatLngOrigin = positions[0];
+	var myLatLngDestination = positions[1];
+	console.log(myLatLngOrigin)
+	console.log(myLatLngDestination)
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 5,
-    center: myLatLng
+    zoom: 6,
+    center: myLatLngOrigin
   });
 
   var flightPlanCoordinates = [
-    {lat: -27.467, lng: 153.027}
   ];
 
-	if (myLatLng) {
-		flightPlanCoordinates.unshift(myLatLng);
-	}
+	flightPlanCoordinates.unshift(myLatLngOrigin);
+	flightPlanCoordinates.push(myLatLngDestination);
+
 
   var flightPath = new google.maps.Polyline({
     path: flightPlanCoordinates,
@@ -88,7 +109,7 @@ function initMap(positions) {
 		'</div>';
 
 	var marker = new google.maps.Marker({
-    position: myLatLng,
+    position: myLatLngDestination,
     map: map,
 		title: 'Surftrip'
   });
