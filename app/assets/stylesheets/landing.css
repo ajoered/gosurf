@@ -22,6 +22,7 @@ html, body {
 #search {
   background-color: #286090;
 }
+
 body,
 h1,
 h2,
@@ -42,8 +43,12 @@ p {
   }
 
 #map {
-  height: 400px;
+  height: 50vh;
   width: 100%;
+}
+
+#uvp {
+  font-size: 45px;
 }
 
 .intro-header {

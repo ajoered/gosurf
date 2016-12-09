@@ -159,11 +159,15 @@
           <ul class="list-group">
             <a class="list-group-item">
               <strong><%= trip.user.name %></strong>
-              <button data-toggle="collapse" data-target="#<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
-              <div id="<%= trip.id %>" class="collapse">
+              <button data-toggle="collapse" data-target="#creator<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
+              <div id="creator<%= trip.id %>" class="collapse">
                 <p><strong>Name:</strong> <%= trip.user.name %></p>
                 <p><strong>Email:</strong> <%= trip.user.email %></p>
+                <% if @status == false %>
+                <p><strong>Phone: </strong>*********</p>
+                <% else %>
                 <p><strong>Phone:</strong> <%= trip.user.phone_number %></p>
+                <% end %>
               </div>
               <div class="clearfix"></div>
             </a>

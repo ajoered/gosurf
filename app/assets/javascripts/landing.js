@@ -1,35 +1,53 @@
-$(document).on('ready', initialize);
 $(document).on('turbolinks:load', initialize);
 
 function initialize() {
 	$('#search_button').on('click', fetchTrips);
 }
 
-function initMap() {
-  var myLatLng = {lat: 40.468, lng: -3.652};
+function initMap(position) {
+	console.log(position)
+  var myLatLng = position;
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 3,
+    zoom: 6,
     center: myLatLng
   });
 
+	var contentString = '<div id="content">'+
+		'<div id="siteNotice">'+
+		'</div>'+
+		'<h1 id="firstHeading" class="firstHeading">Surf Trip</h1>'+
+		'<div id="bodyContent">'+
+		'<p><b>Generic Surftrip</b>'
+		'</div>'+
+		'</div>';
+
+	var infowindow = new google.maps.InfoWindow({
+		content: contentString
+	});
+
 	var marker = new google.maps.Marker({
-    position: {lat: 40.468, lng: -3.652},
-    map: map
+    position: myLatLng,
+    map: map,
+		title: 'Surftrip'
   });
+	marker.addListener('click', function() {
+	infowindow.open(map, marker);
+	});
+
 };
 
 function fetchTrips(event) {
 	event.preventDefault();
-	$('.map_area').css('visibility', 'visible');
 	initMap();
+	$('.map_area').css('visibility', 'visible');
   var country = {country: $('#country').val()};
 
   $.ajax({
     type: "POST",
     url: "/search",
     data: country,
-    success: updateMap,
+    success: getLatLng,
     error: handleError
   });
 }
@@ -48,15 +66,16 @@ function getLatLng(response){
     'address': tripsArray[0].origin},
     function(results, status) {
       var position = [];
+			var myLatLng;
       if (status == google.maps.GeocoderStatus.OK) {
         position[0] = results[0].geometry.location.lat();
         position[1] = results[0].geometry.location.lng();
+				myLatLng = {lat: position[0], lng: position[1]}
       } else {
         alert("Something got wrong " + status);
       }
-      return position;
+      initMap(myLatLng);
   });
-  console.log(geocoder);
 };
 
 function handleError (error) {
