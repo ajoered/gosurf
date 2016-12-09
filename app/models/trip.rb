@@ -8,14 +8,14 @@ class Trip < ApplicationRecord
   validates :user, 	      presence: true
 
   geocoded_by :origin
-#   before_save :geocode_the_destination
-#   after_validation :geocode
-#
-# def geocode_the_destination
-#   coords = Geocoder.coordinates(self.start)
-#   self.destination_lat = coords[0]
-#   self.destination_lng = coords[1]
-# end
+  before_save :geocode_the_destination
+  after_validation :geocode
+
+  def geocode_the_destination
+    coords = Geocoder.coordinates(self.destination)
+    self.destination_lat = coords[0]
+    self.destination_lng = coords[1]
+  end
 
 
   def max_requests_reached
