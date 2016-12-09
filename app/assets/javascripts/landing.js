@@ -4,42 +4,8 @@ function initialize() {
 	$('#search_button').on('click', fetchTrips);
 }
 
-function initMap(position) {
-	console.log(position)
-  var myLatLng = position;
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 6,
-    center: myLatLng
-  });
-
-	var contentString = '<div id="content">'+
-		'<div id="siteNotice">'+
-		'</div>'+
-		'<h1 id="firstHeading" class="firstHeading">Surf Trip</h1>'+
-		'<div id="bodyContent">'+
-		'<p><b>Generic Surftrip</b>'
-		'</div>'+
-		'</div>';
-
-	var infowindow = new google.maps.InfoWindow({
-		content: contentString
-	});
-
-	var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-		title: 'Surftrip'
-  });
-	marker.addListener('click', function() {
-	infowindow.open(map, marker);
-	});
-
-};
-
 function fetchTrips(event) {
 	event.preventDefault();
-	initMap();
 	$('.map_area').css('visibility', 'visible');
   var country = {country: $('#country').val()};
 
@@ -51,13 +17,6 @@ function fetchTrips(event) {
     error: handleError
   });
 }
-
-function updateMap(response) {
-  var tripArray = response
-  tripArray.forEach(function (trip){
-		console.log(trip)
-  });
-};
 
 function getLatLng(response){
   var tripsArray = response;
@@ -74,7 +33,65 @@ function getLatLng(response){
       } else {
         alert("Something got wrong " + status);
       }
+
+		
       initMap(myLatLng);
+  });
+};
+
+
+function initMap(position) {
+	var myLatLng = position;
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 5,
+    center: myLatLng
+  });
+
+  var flightPlanCoordinates = [
+    {lat: -27.467, lng: 153.027}
+  ];
+
+	if (myLatLng) {
+		flightPlanCoordinates.unshift(myLatLng);
+	}
+
+  var flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+	var infowindow = new google.maps.InfoWindow({
+		content: contentString
+	});
+	var contentString = '<div id="content">'+
+		'<div id="siteNotice">'+
+		'</div>'+
+		'<h1 id="firstHeading" class="firstHeading">Surf Trip</h1>'+
+		'<div id="bodyContent">'+
+		'<p><b>Generic Surftrip</b>'
+		'</div>'+
+		'</div>';
+
+	var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+		title: 'Surftrip'
+  });
+	marker.addListener('click', function() {
+	infowindow.open(map, marker);
+	});
+
+  flightPath.setMap(map);
+}
+
+function updateMap(response) {
+  var tripArray = response
+  tripArray.forEach(function (trip){
+		console.log(trip)
   });
 };
 
@@ -82,7 +99,3 @@ function handleError (error) {
     console.log('Error!');
     console.log(error.responseText);
 };
-
-function scrollDown () {
-		window.scrollBy(0, 100);
-	}
