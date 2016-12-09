@@ -19,39 +19,40 @@ function fetchTrips(event) {
 }
 
 function getLatLng(response){
-  var tripsArray = response;
+	console.log(response);
+  var tripsArray = response;//assign response to variable
   var geocoder   = new google.maps.Geocoder();
 	var myLatLngOriginDestination = [];
-	var country = {
-		origin: null,
-		destination: null
-	};
-	
-		geocoder.geocode( { //get origin coordinates
-	    'address': tripsArray[0].origin},
+
+	tripsArray.forEach(function(trip) {//loop over trip array
+		var tripCoordinates = { //create empty object to be pushed into empty array
+			origin: null,
+			destination: null
+		};
+		geocoder.geocode( { //get origin coordinates for trip
+	    'address': trip.origin},
 	    function(results, status) {
 				var myLatLngOrigin;
 	      if (status == google.maps.GeocoderStatus.OK) {
-					myLatLngOrigin = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+					tripCoordinates.origin = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()} //assign result to tripCoordinates
 	      } else {
 	        alert("Something got wrong " + status);
 	      }
-				myLatLngOriginDestination.push(myLatLngOrigin)
 	  });
 
-		geocoder.geocode( { //get destination coordinates
-			'address': tripsArray[0].destination},
+		geocoder.geocode( { //get origin coordinates for trip
+			'address': trip.destination},
 			function(results, status) {
 				var myLatLngDestination;
 				if (status == google.maps.GeocoderStatus.OK) {
-					myLatLngDestination = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+					tripCoordinates.destination = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()} //assign result to tripCoordinates
 				} else {
 					alert("Something got wrong " + status);
 				}
-				myLatLngOriginDestination.push(myLatLngDestination)
-				console.log(myLatLngOriginDestination);
-				initMap(myLatLngOriginDestination);
+				myLatLngOriginDestination.push(tripCoordinates) //push result into array
 		});
+		console.log(myLatLngOriginDestination);
+	});
 
 };
 
