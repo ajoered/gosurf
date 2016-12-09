@@ -11,7 +11,7 @@ function fetchTrips(event) {
 
   $.ajax({
     type: "POST",
-    url: "/search",
+    url: "/api/search",
     data: country,
     success: getLatLng,
     error: handleError
@@ -19,51 +19,64 @@ function fetchTrips(event) {
 }
 
 function getLatLng(response){
+
   var tripsArray = response;//assign response to variable
   var geocoder   = new google.maps.Geocoder();
 	var countryCoordinatesArray = [];
-	console.log(tripsArray);
-	tripsArray.forEach(function(trip) {//loop over trip array
-		var tripCoordinates = { //create empty object to be pushed into empty array
-			origin: undefined,
-			destination: undefined
-		};
-		geocoder.geocode( { //get origin coordinates for trip
-	    'address': trip.origin},
-	    function(results, status) {
-				console.log('viernes')
-				debugger
-	      if (status == google.maps.GeocoderStatus.OK) {
-					tripCoordinates.origin = {
-						lat: results[0].geometry.location.lat(),
-						lng: results[0].geometry.location.lng()
-					} //assign result to tripCoordinates
-	      } else {
-	        alert("Something got wrong " + status);
-	      }
-	  });
 
-		geocoder.geocode( { //get origin coordinates for trip
-			'address': trip.destination},
-			function(results, status) {
-				// var myLatLngDestination;
-				if (status == google.maps.GeocoderStatus.OK) {
-					tripCoordinates.destination = {
-						lat: results[0].geometry.location.lat(),
-						lng: results[0].geometry.location.lng()
-					} //assign result to tripCoordinates
-				} else {
-					alert("Something got wrong " + status);
-				}
+	tripsArray.forEach(function(trip) {//loop over trip array
+		var origin = new Promise(function (resolve, reject) {//Promise1
+			geocoder.geocode( { //get origin coordinates for trip
+		    'address': trip.origin},
+		    function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						var latLng = {
+							lat: results[0].geometry.location.lat(),
+							lng: results[0].geometry.location.lng(),
+						};
+
+						resolve(latLng);
+					} else {
+						reject(status);
+					}
+		  });
 		});
-		countryCoordinatesArray.push(tripCoordinates) //push result into array
+
+		var destination = new Promise(function (resolve, reject) {//save in a promise
+			geocoder.geocode( { //get origin coordinates for trip
+		    'address': trip.destination},
+		    function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						var latLng = {
+							lat: results[0].geometry.location.lat(),
+							lng: results[0].geometry.location.lng(),
+						};
+
+						resolve(latLng);
+					} else {
+						reject(status);
+					}
+		  });
+		});
+
+		Promise.all([
+			origin,//promise 1
+			destination//promise 2
+		]).then(function([origin, destination]) {
+			var tripCoordinates = {
+				origin: origin,
+				destination: destination
+			};
+			countryCoordinatesArray.push(tripCoordinates);
+			initMap(countryCoordinatesArray);
+		}).catch(function (error) {
+			console.log("Promise error", error);
+		});
 	});
-	console.log('primer debugger', countryCoordinatesArray);
-	initMap(countryCoordinatesArray)
 };
 
 function initMap(coordinateArray) {
-
+	console.log("mooooc");
 	// console.log("initmap", tripCoordinateArray);
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 6,

@@ -5,17 +5,6 @@ class TripsController < ApplicationController
     @trips = Trip.all
   end
 
-  def search
-    @country = params[:country]
-    @trips = Trip.where(country: @country)
-	  unless @trips
-	    render json: {error: "No trips found"},
-	    status: 404
-	    return
-	  end
-	  render json: @trips
-  end
-
   def new
     if user_signed_in?
       @trip = current_user.trips.new
