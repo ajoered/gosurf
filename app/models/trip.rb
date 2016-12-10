@@ -13,22 +13,16 @@ class Trip < ApplicationRecord
   after_validation :geocode_the_destination
 
   def geocode_the_destination
-    coords = Geocoder.coordinates(self.destination)
+    coords = Geocoder.coordinates(self.destination + ", " + self.country)
     self.destination_lat = coords[0]
     self.destination_lng = coords[1]
   end
 
   def geocode_the_origin
-    coords = Geocoder.coordinates(self.origin)
+    coords = Geocoder.coordinates(self.origin + ", " + self.country)
     self.origin_lat = coords[0]
     self.origin_lng = coords[1]
   end
 
-  def max_requests_reached
-    @requests = @trip.requests.select { |request| request.status = true }
-    if (@requests.length > @trip.max_users)
-      errors.add(:base, 'Exceeded user limit')
-    end
-  end
 
 end

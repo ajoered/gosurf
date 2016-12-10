@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   root to: 'trips#index'
 
   namespace :api do
-  # get '/routes/:neighborhood', to: 'routes#index'
-  post '/search', to: 'trips#search'
+    post '/search', to: 'trips#search'
   end
 
 end
