@@ -1,5 +1,4 @@
 class TripsController < ApplicationController
- skip_before_action :verify_authenticity_token, only: [:search]
 
   def index
     @trips = Trip.all

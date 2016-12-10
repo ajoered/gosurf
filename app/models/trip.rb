@@ -24,5 +24,4 @@ class Trip < ApplicationRecord
     self.origin_lng = coords[1]
   end
 
-
 end

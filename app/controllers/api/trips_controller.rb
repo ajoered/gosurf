@@ -1,5 +1,5 @@
 class Api::TripsController < ApplicationController
-
+ skip_before_action :verify_authenticity_token, only: [:search]
   def search
     @country = params[:country]
     @trips = Trip.where(country: @country)
