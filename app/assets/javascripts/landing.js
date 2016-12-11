@@ -22,7 +22,7 @@ function initMap(response) {
 	var tripsArray = response;
 	console.log(tripsArray.country);
 
-	if (tripsArray.country) {
+	if (tripsArray.country) {//sets map on country if no results for API query
 
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 5,
@@ -110,36 +110,34 @@ function initMap(response) {
 			  showLoaderOnConfirm: true,
 			  preConfirm: function (comment) {
 			    return new Promise(function (resolve) {
-			      setTimeout(function() {
-							var tripData = {trip_id: trip.id, comment: comment};
-								$.ajax({
-									type: "POST",
-									url: "/requests/create",
-									data: tripData,
-									success: function (comment){}
-								});
-			          resolve()
-							})
-			      }, 2000)
+						var tripData = {trip_id: trip.id, comment: comment};
+							$.ajax({
+								type: "POST",
+								url: "/requests/create",
+								data: tripData,
+								success: function(response){
+									console.log(response)
+								}
+							});
+		          resolve()
+						})
 			    }
-			}).then(function (comment) {
+			}).then(function (response) {
+				console.log(response)
 			  swal({
 			    type: 'success',
 			    title: 'Successfully requested to join this trip!',
-			    html: 'Your message:' + comment
+			    html: 'Your message:' + response
 			  })
 			})
 		});
-		// $('.btn-request').on('click', createRequest);
-		// });
 
 	  flightPath.setMap(map);
 	});
 }
 
 function handleError (error) {
-	var countryError = $('#country').val();
-    console.log(countryError);
+    console.log(error);
     console.log("error", error.responseText);
 };
 
