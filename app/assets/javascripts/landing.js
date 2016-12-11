@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', initialize);
+$(document).on('ready', initialize);
 
 function initialize() {
 	$('#search-button').on('click', fetchTrips);

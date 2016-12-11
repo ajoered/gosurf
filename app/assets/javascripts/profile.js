@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', initialize);
+$(document).on('ready', initialize);
 
 function initialize() {
 	$('.accept-button').on('click', acceptRequest);

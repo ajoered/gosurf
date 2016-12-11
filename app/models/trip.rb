@@ -5,7 +5,9 @@ class Trip < ApplicationRecord
 
   validates :origin,      presence: true, length: { maximum: 250 }
 	validates :start_date, 	presence: true
+  validates :country,     presence: true
   validates :user, 	      presence: true
+  
 
   before_save :geocode_the_origin
   before_save :geocode_the_destination
