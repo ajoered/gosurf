@@ -20,10 +20,32 @@ function fetchTrips(event) {
 
 function initMap(response) {
 	var tripsArray = response;
-	// var centerCoordinates = {
-	// 	lat: tripsArray[0].origin_lat,
-	// 	lng: tripsArray[0].origin_lng
-	// };
+	console.log(tripsArray.country);
+
+	if (tripsArray.country) {
+
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 5,
+			center: {lat: -34.397, lng: 150.644}
+		});
+
+		var geocoder = new google.maps.Geocoder();
+
+		geocoder.geocode( {'address' : tripsArray.country}, function(results, status) {
+	    if (status == google.maps.GeocoderStatus.OK) {
+	        map.setCenter(results[0].geometry.location);
+	    }
+		});
+
+		swal({
+		  title: 'No trips here yet!',
+		  html: $('<div>')
+		    .addClass('some-class')
+		    .text('Want to create one?'),
+		  animation: false,
+		  customClass: 'animated tada'
+		})
+	};
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 5,
@@ -58,6 +80,7 @@ function initMap(response) {
 			title: 'Surftrip'
 	  });
 		marker.addListener('click', function swalAlert() {
+
 			swal({
 			  title: 'Trip to ' + trip.destination,
 			  input: 'text',
@@ -66,20 +89,24 @@ function initMap(response) {
 		    '<div class="panel panel-default panel-primary">' +
 				'<div class="panel-heading">Trip Details' +
 		    '<div class="panel-body">' +
-          '<p><strong>Leaving from: ' + trip.origin + '</p>' +
-					'<p><strong>Kind of trip: ' + trip.kind_of_trip + '</p>' +
-					'<p><strong>Level: ' + trip.level + '</p>' +
-					'<p><strong>Price: ' + trip.price + '</p>' +
-					'<p><strong>Departing: ' + trip.start_date + '</p>' +
-					'<p><strong>Coming back: ' + trip.finish_date + '</p>' +
-					'<p><strong>Empty seats: ' + trip.max_users + '</p>' +
-					'<p><strong>Board Space: ' + trip.space_material + '</p>' +
-					'<p><strong>Description: ' + trip.description + '</p>' +
+          '<p><b>Leaving from: </b>' + trip.origin + '</p>' +
+					'<p><b>Kind of trip: </b>' + trip.kind_of_trip + '</p>' +
+					'<p><b>Level: </b>' + trip.level + '</p>' +
+					'<p><b>Price: </b>' + trip.price + '</p>' +
+					'<p><b>Departing: </b>' + trip.start_date + '</p>' +
+					'<p><b>Coming back: </b>' + trip.finish_date + '</p>' +
+					'<p><b>Empty seats: </b>' + trip.max_users + '</p>' +
+					'<p><b>Board Space: </b>' + trip.space_material + '</p>' +
+					'<p><b>Description: </b>' + trip.description + '</p>' +
 	        '</div>' +
 				'</div>' +
+			'</div>' +
+			'<div class="row created-trips">' +
+				"<p>Want to join?</p>" +
+				"Message:" +
 			'</div>',
 			  showCancelButton: true,
-			  confirmButtonText: 'Request',
+			  confirmButtonText: 'Send Request',
 			  showLoaderOnConfirm: true,
 			  preConfirm: function (comment) {
 			    return new Promise(function (resolve) {
@@ -111,8 +138,9 @@ function initMap(response) {
 }
 
 function handleError (error) {
-    console.log('Error!');
-    console.log(error.responseText);
+	var countryError = $('#country').val();
+    console.log(countryError);
+    console.log("error", error.responseText);
 };
 
 function colorTrip(trip) {
