@@ -1,4 +1,3 @@
-$(document).on('ready', initialize);
 $(document).on('turbolinks:load', initialize);
 
 function initialize() {

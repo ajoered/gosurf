@@ -2,6 +2,7 @@ $(document).on('turbolinks:load', initialize);
 
 function initialize() {
 	$('#search_button').on('click', fetchTrips);
+	$('.btn-request').on('click', createRequest);
 }
 
 function fetchTrips(event) {
@@ -53,16 +54,8 @@ function initMap(response) {
 	  });
 
 		var infowindow = new google.maps.InfoWindow({
-			content: contentString
+			content: '<button class="btn btn-warning btn-request">Request</button>'
 		});
-		var contentString = '<div id="content">'+
-			'<div id="siteNotice">'+
-			'</div>'+
-			'<h1 id="firstHeading" class="firstHeading">Surf Trip</h1>'+
-			'<div id="bodyContent">'+
-			'<p><b>Generic Surftrip</b>'
-			'</div>'+
-			'</div>';
 
 		var marker = new google.maps.Marker({
 	    position: destinationCoordinates,
@@ -95,6 +88,27 @@ function colorTrip(trip) {
 	else {
 		return "rgb(0, 0, 0)"
 	}
+}
+
+function createRequest(event) {
+    console.log("he");
+  var id = {id: event.toElement.id};
+
+  $.ajax({
+    type: "POST",
+    url: "/requests/create",
+    data: id,
+    success: changeVisualElementsButton(event),
+    error: handleError
+  });
+};
+
+function changeVisualElementsButton(event) {
+  console.log(event.currentTarget);
+  $(event.currentTarget).removeClass('btn-warning');
+  $(event.currentTarget).addClass('btn-success');
+  $(event.currentTarget).prop('disabled', true);
+  $(event.currentTarget).text('Requested!');
 }
 
 

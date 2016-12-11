@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get '/profile', to: 'users#profile'
   post '/requests/approve', to: 'requests#approve'
+  post '/requests/create', to: 'requests#create'
   resources :trips
   root to: 'trips#index'
 
