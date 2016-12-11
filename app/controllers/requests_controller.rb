@@ -9,7 +9,8 @@ class RequestsController < ApplicationController
   def create
     if user_signed_in?
       @request = current_user.requests.create(
-            trip_id: params[:id])
+            trip_id: params[:trip_id],
+            comment: params[:comment])
     else
       @error = "You must be logged in to create a trip!"
       redirect_to new_user_session_path

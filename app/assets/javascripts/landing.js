@@ -61,10 +61,37 @@ function initMap(response) {
 	    map: map,
 			title: 'Surftrip'
 	  });
-		marker.addListener('click', function() {
-		infowindow.open(map, marker);
-		$('.btn-request').on('click', createRequest);
+		marker.addListener('click', function swalAlert() {
+			swal({
+			  title: 'Trip to ' + trip.destination,
+			  input: 'text',
+			  showCancelButton: true,
+			  confirmButtonText: 'Request',
+			  showLoaderOnConfirm: true,
+			  preConfirm: function (comment) {
+			    return new Promise(function (resolve) {
+			      setTimeout(function() {
+							var tripData = {trip_id: trip.id, comment: comment};
+								$.ajax({
+									type: "POST",
+									url: "/requests/create",
+									data: tripData,
+									success: function (comment){}
+								});
+			          resolve()
+							})
+			      }, 2000)
+			    }
+			}).then(function (comment) {
+			  swal({
+			    type: 'success',
+			    title: 'Successfully requested to join this trip!',
+			    html: 'Your message:' + comment
+			  })
+			})
 		});
+		// $('.btn-request').on('click', createRequest);
+		// });
 
 	  flightPath.setMap(map);
 	});
