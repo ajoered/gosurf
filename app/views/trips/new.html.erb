@@ -65,13 +65,13 @@
 
           <div class="form-group">
             <%= f.label :level %>
-            <%= f.select(:level, [['Beginner', 1], ['Intermediate', 2], ['Advanced', 3], ['Expert', 4]],{}, { :class => 'form-control' } ) %>
+            <%= f.select(:level, [['Beginner'], ['Intermediate'], ['Advanced'], ['Expert']],{}, { :class => 'form-control' } ) %>
             <small id="emailHelp" class="form-text text-muted">Beginner, Intermediate or Advanced!</small>
           </div>
 
           <div class="form-group">
             <%= f.label :kind_of_trip %>
-            <%= f.select(:kind_of_trip, [['Group', 1], ['Riding Solo', 2]], {}, { :class => 'form-control' } ) %>
+            <%= f.select(:kind_of_trip, [['Group'], ['Riding Solo']], {}, { :class => 'form-control' } ) %>
             <small id="emailHelp" class="form-text text-muted">Determine whether you're looking to go in a group or riding solo.</small>
           </div>
 

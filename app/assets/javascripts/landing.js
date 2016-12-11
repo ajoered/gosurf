@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', initialize);
 
 function initialize() {
-	$('#search_button').on('click', fetchTrips);
+	$('#search-button').on('click', fetchTrips);
 }
 
 function fetchTrips(event) {
@@ -20,14 +20,14 @@ function fetchTrips(event) {
 
 function initMap(response) {
 	var tripsArray = response;
-	var centerCoordinates = {
-		lat: tripsArray[0].origin_lat,
-		lng: tripsArray[0].origin_lng
-	};
+	// var centerCoordinates = {
+	// 	lat: tripsArray[0].origin_lat,
+	// 	lng: tripsArray[0].origin_lng
+	// };
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 6,
-    center: centerCoordinates
+    zoom: 5,
+    center: new google.maps.LatLng(tripsArray[0].origin_lat, tripsArray[0].origin_lng)
   });
 
 	tripsArray.forEach(function(trip) {
@@ -52,10 +52,6 @@ function initMap(response) {
 	    strokeWeight: 2
 	  });
 
-		var infowindow = new google.maps.InfoWindow({
-			content: '<button class="btn btn-warning btn-request" id =' + trip.id + '">Request</button>'
-		});
-
 		var marker = new google.maps.Marker({
 	    position: destinationCoordinates,
 	    map: map,
@@ -65,6 +61,23 @@ function initMap(response) {
 			swal({
 			  title: 'Trip to ' + trip.destination,
 			  input: 'text',
+				html:
+				'<div class="row created-trips">' +
+		    '<div class="panel panel-default panel-primary">' +
+				'<div class="panel-heading">Trip Details' +
+		    '<div class="panel-body">' +
+          '<p><strong>Leaving from: ' + trip.origin + '</p>' +
+					'<p><strong>Kind of trip: ' + trip.kind_of_trip + '</p>' +
+					'<p><strong>Level: ' + trip.level + '</p>' +
+					'<p><strong>Price: ' + trip.price + '</p>' +
+					'<p><strong>Departing: ' + trip.start_date + '</p>' +
+					'<p><strong>Coming back: ' + trip.finish_date + '</p>' +
+					'<p><strong>Empty seats: ' + trip.max_users + '</p>' +
+					'<p><strong>Board Space: ' + trip.space_material + '</p>' +
+					'<p><strong>Description: ' + trip.description + '</p>' +
+	        '</div>' +
+				'</div>' +
+			'</div>',
 			  showCancelButton: true,
 			  confirmButtonText: 'Request',
 			  showLoaderOnConfirm: true,
@@ -103,13 +116,13 @@ function handleError (error) {
 };
 
 function colorTrip(trip) {
-	if (trip.level === "1") {
+	if (trip.level === "Beginner") {
 		return "rgb(39, 139, 31)"
 	}
-	else if (trip.level === "2") {
+	else if (trip.level === "Intermediate") {
 		return "rgb(230, 110, 29)"
 	}
-	else if (trip.level === "3") {
+	else if (trip.level === "Advanced") {
 		return "rgb(181, 9, 9)"
 	}
 	else {
@@ -117,26 +130,6 @@ function colorTrip(trip) {
 	}
 }
 
-function createRequest(event) {
-    console.log("he");
-  var id = {id: event.toElement.id};
-
-  $.ajax({
-    type: "POST",
-    url: "/requests/create",
-    data: id,
-    success: changeVisualElementsButton(event),
-    error: handleError
-  });
-};
-
-function changeVisualElementsButton(event) {
-  console.log(event.currentTarget);
-  $(event.currentTarget).removeClass('btn-warning');
-  $(event.currentTarget).addClass('btn-success');
-  $(event.currentTarget).prop('disabled', true);
-  $(event.currentTarget).text('Requested!');
-}
 
 
 // function getLatLng(response){
