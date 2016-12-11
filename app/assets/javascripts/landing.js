@@ -2,7 +2,6 @@ $(document).on('turbolinks:load', initialize);
 
 function initialize() {
 	$('#search_button').on('click', fetchTrips);
-	$('.btn-request').on('click', createRequest);
 }
 
 function fetchTrips(event) {
@@ -54,7 +53,7 @@ function initMap(response) {
 	  });
 
 		var infowindow = new google.maps.InfoWindow({
-			content: '<button class="btn btn-warning btn-request">Request</button>'
+			content: '<button class="btn btn-warning btn-request" id =' + trip.id + '">Request</button>'
 		});
 
 		var marker = new google.maps.Marker({
@@ -64,6 +63,7 @@ function initMap(response) {
 	  });
 		marker.addListener('click', function() {
 		infowindow.open(map, marker);
+		$('.btn-request').on('click', createRequest);
 		});
 
 	  flightPath.setMap(map);
