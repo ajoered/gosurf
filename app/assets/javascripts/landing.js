@@ -2,12 +2,41 @@ $(document).on('ready', initialize);
 
 function initialize() {
 	$('#search-button').on('click', fetchTrips);
-}
+
+	var searchAutocomplete = createAutocomplete({
+		input: $('.js-search-trip'),
+		output: $('.js-country-trip'),
+		getPlace: function (place) {
+      var country = "";
+      place.address_components.forEach(function (address_component) {
+        if (address_component.types[0].toLowerCase() === "country") {
+          country = address_component["long_name"];
+        }
+      });
+      return country;
+    }
+	});
+};
+
+function createAutocomplete(options) {
+  var input = options.input
+  var output = options.output
+  var getPlace = options.getPlace;
+  var autocomplete = new google.maps.places.Autocomplete(input[0], {
+    types: ['geocode']
+  });
+  autocomplete.addListener('place_changed', function fillOutput() {
+    var place = autocomplete.getPlace();
+    output.val(getPlace(place));
+  });
+
+  return autocomplete;
+};
 
 function fetchTrips(event) {
 	event.preventDefault();
 	$('.map-area').css('visibility', 'visible');
-  var country = {country: $('#country').val()};
+  var country = {country_origin: $('.js-country-trip').val()};
 
   $.ajax({
     type: "POST",
@@ -211,62 +240,3 @@ function colorTrip(trip) {
 		return "rgb(0, 0, 0)"
 	}
 }
-
-
-
-// function getLatLng(response){
-//
-//   var tripsArray = response;//assign response to variable
-//   var geocoder   = new google.maps.Geocoder();
-// 	var countryCoordinatesArray = [];
-//
-// 	tripsArray.forEach(function(trip) {//loop over trip array
-// 		var origin = new Promise(function (resolve, reject) {//Promise1
-// 			geocoder.geocode( { //get origin coordinates for trip
-// 		    'address': trip.origin},
-// 		    function(results, status) {
-// 					if (status == google.maps.GeocoderStatus.OK) {
-// 						var latLng = {
-// 							lat: results[0].geometry.location.lat(),
-// 							lng: results[0].geometry.location.lng(),
-// 						};
-//
-// 						resolve(latLng);
-// 					} else {
-// 						reject(status);
-// 					}
-// 		  });
-// 		});
-//
-// 		var destination = new Promise(function (resolve, reject) {//save in a promise
-// 			geocoder.geocode( { //get origin coordinates for trip
-// 		    'address': trip.destination},
-// 		    function(results, status) {
-// 					if (status == google.maps.GeocoderStatus.OK) {
-// 						var latLng = {
-// 							lat: results[0].geometry.location.lat(),
-// 							lng: results[0].geometry.location.lng(),
-// 						};
-//
-// 						resolve(latLng);
-// 					} else {
-// 						reject(status);
-// 					}
-// 		  });
-// 		});
-//
-// 		Promise.all([
-// 			origin,//promise 1
-// 			destination//promise 2
-// 		]).then(function([origin, destination]) {
-// 			var tripCoordinates = {
-// 				origin: origin,
-// 				destination: destination
-// 			};
-// 			countryCoordinatesArray.push(tripCoordinates);
-// 			initMap(countryCoordinatesArray);
-// 		}).catch(function (error) {
-// 			console.log("Promise error", error);
-// 		});
-// 	});
-// };

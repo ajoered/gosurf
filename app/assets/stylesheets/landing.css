@@ -6,18 +6,24 @@ html, body {
 
 .topnav {
     font-size: 14px;
-    background-color: rgb(6, 6, 8);
+    background-color: #132038;
     text-transform: uppercase;
 }
 
 .navbar-brand {
   padding-top: 22px;
   font-size: 22px;
+  color: rgb(245, 245, 245)
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #e0e0e0;
 }
 
 .navbar-right>li>a {
   padding-top: 22px;
   padding-right: 20px;
+
 }
 
 .navbar {
@@ -25,7 +31,7 @@ html, body {
 }
 
 #search {
-  background-color: #286090;
+  background-color: #132038;
 }
 
 body,
@@ -48,7 +54,7 @@ p {
   }
 
 #map {
-  height: 50vh;
+  height: 60vh;
   width: 100%;
 }
 
@@ -86,7 +92,11 @@ p {
 }
 
 section {
-  padding: 100px 0;
+  padding: 60px 0;
+}
+
+.section-heading {
+  color: #f4f4f4;
 }
 
 .search_button {
@@ -98,8 +108,7 @@ section {
 }
 
 .navbar-footer {
-  margin-bottom: 0px;
-  margin-top: 0px;
-  width: 100vw;
-  padding: 5px;
+  text-align: center;
+  background-color: rgba(128, 128, 128, 0.3);
+  margin: 0px;
 }

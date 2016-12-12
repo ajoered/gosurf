@@ -3,10 +3,12 @@ class Trip < ApplicationRecord
   has_many :users, through: :requests
   belongs_to :user
 
-  validates :origin,      presence: true, length: { maximum: 250 }
-	validates :start_date, 	presence: true
-  validates :country,     presence: true
-  validates :user, 	      presence: true
+  validates :origin,            presence: true
+	validates :start_date, 	      presence: true
+  validates :user, 	            presence: true
+  validates :price,             presence: true
+  validates :max_users, 	      presence: true
+  validates :space_material, 	  presence: true
 
 
   before_save :geocode_the_origin
@@ -15,13 +17,13 @@ class Trip < ApplicationRecord
   after_validation :geocode_the_destination
 
   def geocode_the_destination
-    coords = Geocoder.coordinates(self.destination + ", " + self.country)
+    coords = Geocoder.coordinates(self.destination)
     self.destination_lat = coords[0]
     self.destination_lng = coords[1]
   end
 
   def geocode_the_origin
-    coords = Geocoder.coordinates(self.origin + ", " + self.country)
+    coords = Geocoder.coordinates(self.origin)
     self.origin_lat = coords[0]
     self.origin_lng = coords[1]
   end

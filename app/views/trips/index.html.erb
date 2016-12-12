@@ -1,4 +1,6 @@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqBfeC-s5-oWg9BdzPNA6J_oNp5nID06g"async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqBfeC-s5-oWg9BdzPNA6J_oNp5nID06g"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
 <%= javascript_include_tag '/assets/landing' %>
 <%= javascript_include_tag '/assets/video' %>
 
@@ -45,12 +47,15 @@
         <div class="search_form">
 
           <!-- <%= text_field_tag :country, {}, class: 'form-control', id: 'country', placeholder: 'Enter Country' %> -->
-          <%= country_select(
+            <%= text_field_tag :search, value = nil, class: "js-search-trip form-control", onFocus: "geolocate()", type: "text"%>
+
+            <%= text_field_tag :country_search, value = nil, class: "js-country-trip form-control hidden", disabled: "true"%>
+          <!-- <%= country_select(
           "country",
           { priority_countries: ["ES", "US"] },
           { selected: "ES"},
           { class: 'form-control', id: "country" }
-          ) %>
+          ) %> -->
           <span class="input-group-btn">
             <button type="button" class="page-scroll btn btn-default btn-xl sr-button search_button" id="search-button">Search</button>
           </span>

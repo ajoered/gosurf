@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#profile'
   post '/requests/approve', to: 'requests#approve'
   post '/requests/create', to: 'requests#create'
+  post '/trips/create', to: 'trips#create'
   resources :trips
   root to: 'trips#index'
 

@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   before_action :find_trip
-  skip_before_action :verify_authenticity_token, only: [:approve]
+  skip_before_action :verify_authenticity_token, only: [:approve, :create]
 
   def approve
     @request = Request.find_by(id: params[:id])
@@ -40,17 +40,6 @@ class RequestsController < ApplicationController
   end
 
   private
-
-  # def check_user_is_owner(trip_id)
-  #   @trip = Trip.find_by(id: trip_id)
-  #   (current_user.id == @trip.user.id)? true : false
-  # end
-
-  # def reached_max_users(trip_id)
-  #   @trip = Trip.find_by(id: trip_id)
-  #   @true_requests = @trip.requests.where(status: true)
-  #   (@true_requests.length >= @trip.max_users)? true : false
-  # end
 
   def find_trip
     @trip = Trip.find_by(id: params[:trip_id])

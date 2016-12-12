@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-
+  skip_before_action :verify_authenticity_token, only: [:create]
   def index
     @trips = Trip.all
   end
@@ -16,18 +16,19 @@ class TripsController < ApplicationController
   def create
     @user = current_user
     @trip = @user.trips.create(
-            level: params[:trip][:level],
-            description: params[:trip][:description],
-        		kind_of_trip: params[:trip][:kind_of_trip],
-        		origin: params[:trip][:origin],
-            country: params[:trip][:country],
-            destination: params[:trip][:destination],
-            start_date: params[:trip][:start_date],
-            finish_date: params[:trip][:finish_date],
-            max_users: params[:trip][:max_users],
-            space_material: params[:trip][:space_material])
-
-        	redirect_to root_path
+            level:               params[:level],
+            price:               params[:price],
+            description:         params[:description],
+        		kind_of_trip:        params[:kind_of_trip],
+        		origin:              params[:origin],
+            destination:         params[:destination],
+            start_date:          params[:start_date],
+            finish_date:         params[:finish_date],
+            max_users:           params[:max_users],
+            space_material:      params[:space_material],
+            country_origin:      params[:country_origin],
+            country_destination: params[:country_destination]
+            )
   end
 
   def destroy

@@ -15,16 +15,6 @@
         <hr>
 
         <div class="form-group">
-          <%= f.label :country_origin %>
-          <%= f.text_field :country, class: "js-country-origin field form-control", disabled: "true"%>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :country_destination %>
-          <%= f.text_field :country, class: "js-country-destination field form-control", disabled: "true"%>
-        </div>
-
-        <div class="form-group">
       	  <%= f.label :origin %>
       	  <%= f.text_field :origin, class: "js-search-origin form-control", onFocus: "geolocate()", type: "text"%>
         </div>
@@ -32,6 +22,16 @@
         <div class="form-group">
           <%= f.label :destination %>
           <%= f.text_field :destination, class: "js-search-destination form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :country_origin %>
+          <%= f.text_field :country_origin, class: "js-country-origin field form-control", disabled: "true"%>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :country_destination %>
+          <%= f.text_field :country_destination, class: "js-country-destination field form-control", disabled: "true"%>
         </div>
 
         <div class="form-group">
@@ -95,7 +95,7 @@
             <%= f.text_field :description, class: "form-control" %>
           </div>
 
-          <%= f.button "Create a trip", class: "btn btn-success", id: "create-trip-btn"%>
+          <button type="button" class="btn btn-success" id="create-trip-btn">Create a trip!</button>
         </div>
 
       <% end %>
