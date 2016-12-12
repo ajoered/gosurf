@@ -116,22 +116,78 @@ function initMap(response) {
 								url: "/requests/create",
 								data: tripData,
 								success: function(response){
-									console.log(response)
+									resolve(response);
 								}
 							});
-		          resolve()
 						})
 			    }
 			}).then(function (response) {
-				console.log(response)
-			  swal({
-			    type: 'success',
-			    title: 'Successfully requested to join this trip!',
-			    html: 'Your message:' + response
-			  })
+				console.log(response);
+				if (response.status === 5) {
+					swal({
+					  title: 'You have already requested to join this trip',
+						type: 'warning',
+					  text: "",
+					  timer: 2000
+					})
+				}
+				else if (response.status === 4) {
+					swal({
+					  title: 'Trip Full!',
+						type: 'warning',
+					  text: "Sorry but it looks like they're ready to go..",
+					  timer: 2000
+					}).then(
+					  function () {},
+					  // handling the promise rejection
+					  function (dismiss) {
+					    if (dismiss === 'timer') {
+					      console.log('I was closed by the timer')
+					    }
+						}
+					)
+				}
+				else if (response.status === 3)
+				  swal({
+				    type: 'success',
+				    title: 'Successfully requested to join this trip!',
+				    html: 'Once accepted he will get in touch with you.'
+				  })
+				else if (response.status === 2) {
+					swal({
+					  title: '<u>Please Log In</u>',
+					  type: 'info',
+					  html:
+					    'You must be logged in to join a trip!<br><br> ' +
+							'Not registered yet? ' +
+							'<a href="/users/sign_up">Register</a>',
+					  showCloseButton: true,
+					  showCancelButton: true,
+					  confirmButtonText:
+					    '<a class="fa fa-thumbs-up"></a> Log In!',
+					  cancelButtonText:
+					    '<i class="fa fa-thumbs-down">Not now</i>'
+					}).then(function () {
+						window.location = '/users/sign_in';
+					})
+				} else {
+					swal({
+					  title: 'You are the owner of this trip!',
+						type: 'warning',
+					  text: 'We know you want to surf, but give others a chance...',
+					  timer: 2000
+					}).then(
+					  function () {},
+					  // handling the promise rejection
+					  function (dismiss) {
+					    if (dismiss === 'timer') {
+					      console.log('I was closed by the timer')
+					    }
+					  }
+					)
+				}
 			})
 		});
-
 	  flightPath.setMap(map);
 	});
 }

@@ -7,7 +7,7 @@ class Trip < ApplicationRecord
 	validates :start_date, 	presence: true
   validates :country,     presence: true
   validates :user, 	      presence: true
-  
+
 
   before_save :geocode_the_origin
   before_save :geocode_the_destination
@@ -24,6 +24,19 @@ class Trip < ApplicationRecord
     coords = Geocoder.coordinates(self.origin + ", " + self.country)
     self.origin_lat = coords[0]
     self.origin_lng = coords[1]
+  end
+
+  def reached_max_users
+    true_requests = self.requests.where(status: true)
+    (true_requests.length >= self.max_users)? true : false
+  end
+
+  def check_user_is_owner(user_id)
+    (user_id == self.user.id)? true : false
+  end
+
+  def same_user_request(user_id)
+    (self.requests.where(user_id: user_id))? true : false
   end
 
 end

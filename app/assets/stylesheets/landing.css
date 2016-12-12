@@ -7,16 +7,21 @@ html, body {
 .topnav {
     font-size: 14px;
     background-color: rgb(6, 6, 8);
+    text-transform: uppercase;
 }
 
 .navbar-brand {
-  padding: 0px;
+  padding-top: 22px;
+  font-size: 22px;
 }
 
-.navbar-brand>img {
-  height: 100%;
-  padding: 15px;
-  width: auto;
+.navbar-right>li>a {
+  padding-top: 22px;
+  padding-right: 20px;
+}
+
+.navbar {
+  min-height: 64px;
 }
 
 #search {
@@ -31,7 +36,7 @@ h4,
 h5,
 h6,
 p {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 600;
 }
 
@@ -48,22 +53,19 @@ p {
 }
 
 #uvp {
-  font-size: 45px;
+  font-size: 60px;
 }
 
 .intro-header {
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 80px;
     text-align: center;
     color: #f8f8f8;
-    /*background: url(headerjohn4.jpg) no-repeat center center;*/
-    /*background-size: cover;*/
 }
-
 
 .intro-message {
     position: relative;
-    padding-top: 20%;
+    padding-top: 10%;
     padding-bottom: 20%;
 }
 
@@ -83,12 +85,6 @@ p {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 }
 
-/*p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}*/
-
 section {
   padding: 100px 0;
 }
@@ -103,5 +99,7 @@ section {
 
 .navbar-footer {
   margin-bottom: 0px;
-  margin-top: 10px;
+  margin-top: 0px;
+  width: 100vw;
+  padding: 5px;
 }
