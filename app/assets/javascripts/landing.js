@@ -109,7 +109,7 @@ function initMap(response) {
 			title: 'Surftrip'
 	  });
 		marker.addListener('click', function swalAlert() {
-
+console.log(trip.start_date);
 			swal({
 			  title: 'Trip Details',
 			  input: 'text',

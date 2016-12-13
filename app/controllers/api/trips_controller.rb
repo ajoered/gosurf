@@ -4,7 +4,7 @@ class Api::TripsController < ApplicationController
   def search
     @country = params[:country_origin]
     @trips = Trip.where(country_origin: @country)
-	  if @trips == []
+	  if @trips.empty?
 	    @trips = {country: @country}
 	  end
 	  render json: @trips

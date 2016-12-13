@@ -1,5 +1,5 @@
 class Api::RequestsController < ApplicationController
-    before_action :find_trip
+  before_action :find_trip
  skip_before_action :verify_authenticity_token
 
   def approve

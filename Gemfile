@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'phony_rails'
 gem 'country_select', git: 'https://github.com/alibabajan/country_select.git'
 gem 'geocoder'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

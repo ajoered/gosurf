@@ -14,6 +14,9 @@ class User < ApplicationRecord
                   format: { with: VALID_EMAIL_REGEX },
                   uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
-  validates :phone_number, presence: true, length: { maximum: 7 }
+  validates :phone_number, phony_plausible: true
+
+phony_normalize :phone_number, default_country_code: 'US'
+
 
 end
