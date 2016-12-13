@@ -1,38 +1,192 @@
 <%= javascript_include_tag '/assets/profile.js' %>
+<%= stylesheet_link_tag '/assets/profile.css' %>
+
 <!-- <%= javascript_include_tag '/assets/bootstrap.min' %> -->
+<div class="container-fluid">
+<div class="row main-profile">
+  <div class="col-md-8 main-profile">
 
-<div class="container">
-  <div class="row page-header">
-    <h2>Hey <%= current_user.name %>!</h2>
+    <div class="page-header">
+      <h2>Hey <%= current_user.name %>!</h2>
+    </div>
+
+    <!-- Profile table -->
+
+    <div class="panel-group">
+      <div class="panel panel-default panel-primary">
+        <div class="panel-heading">
+          <p class="panel-title">
+            <button class="btn btn-default btn-sm pull-right btn-edit"><%= link_to 'Edit', edit_user_registration_path %></button>
+            <small>My Profile</small>
+          </p>
+        </div>
+        <div id="collapse_profile" class="accordion-body ">
+          <div class="panel-body">
+            <p><strong><%= current_user.name %></strong></p>
+            <a class="list-group-item"><b>E-mail:</b> <%= current_user.email %></a>
+            <a class="list-group-item"><b>Level:</b> <%= current_user.level %></a>
+            <a class="list-group-item"><b>Phone no.:</b> <%= current_user.phone_number %></a>
+            <a class="list-group-item"><b>Bio: "</b> <%= current_user.bio %>"</a>
+          </div>
+          <div class="panel-footer">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Profile table -->
-  <div class="row">
-    <ul class="list-group">
-      <a href="/profile" class="list-group-item active">
-        Profile
-      </a>
-      <a class="list-group-item"><strong>Name:</strong> <%= current_user.name %></a>
-      <a class="list-group-item"><strong>E-mail:</strong> <%= current_user.email %></a>
-      <a class="list-group-item"><strong>Level:</strong> <%= current_user.level %></a>
-      <a class="list-group-item"><strong>Bio:</strong> <%= current_user.bio %></a>
-    </ul>
-    <button class="btn btn-default btn-sm pull-left"><%= link_to 'Edit', edit_user_registration_path %></button>
+  <div class="col-md-4 main-profile-box text-center">
+    <div class="page-header">
+      <h2>Welcome!</h2>
+    </div>
+       <div class="box">
+           <div class="box-content">
+               <h3 class="tag-title">This is your User Dashboard.</h3>
+               <hr />
+               <p>You may view and edit your profile, access your created trips and manage requests.</p>
+               <br />
+               <a href="ppc.html" class="btn btn-block btn-primary">Profile</a>
+               <a href="ppc.html" class="btn btn-block btn-default">Created Trips</a>
+               <a href="ppc.html" class="btn btn-block btn-default">Requested Trips</a>
+           </div>
+       </div>
   </div>
+</div>
+      <!-- Trips section -->
 
-  <!-- Trips section -->
-  <div class="row page-header">
-    <h2>Your Trips</h2>
-  </div>
-
-  <!-- Created trips -->
-  <div class="row">
-    <h4>Created Trips</h4>
-  </div>
-  <!-- If requests exist -->
-  <% if @trips.length > 0 %>
+<div class="row created-trips">
+  <div class="col-md-8 created-trips">
+    <!-- Created trips -->
+    <div class="page-header">
+      <h4>Created Trips</h4>
+    </div>
+    <!-- If trips exist -->
+    <% if @trips.length > 0 %>
     <% @trips.each do |trip| %>
-    <div class="row created-trips">
+    <div class=" created-trips">
+      <div class="panel panel-default panel-primary">
+
+        <!-- Trip details panel -->
+        <div class="panel-heading">
+          <p class="panel-title">
+            <a data-toggle="collapse" href="#toggle<%= trip.id %>"><small>Trip to <%= trip.destination %></small></a>
+          </p>
+        </div>
+        <div id="toggle<%= trip.id %>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p><strong>Departing from:</strong> <%= trip.origin %></p>
+            <p><strong>Kind of trip:</strong> <%= trip.kind_of_trip %></p>
+            <p><strong>Price:</strong> <%= trip.price %></p>
+            <p><strong>Departing:</strong> <%= trip.start_date %></p>
+            <p><strong>Coming back:</strong> <%= trip.finish_date %></p>
+            <p><strong>Empty seats:</strong> <%= trip.max_users %></p>
+            <p><strong>Board Space:</strong> <%= trip.space_material %></p>
+            <p><strong>Description:</strong> <%= trip.description %></p>
+          </div>
+        </div>
+
+        <!-- user requests -->
+        <!-- if requests exist-->
+        <% if trip.requests.length > 0 %>
+        <div class="panel-body">
+          <h5>Requests:</h5>
+        </div>
+        <% trip.requests.each do |request| %>
+        <!-- user request if false -->
+        <% if request.status == false %>
+        <ul class="list-group">
+          <a class="list-group-item">
+            <div>
+              <!-- user request buttons -->
+              <button class="btn btn-warning btn-sm pull-right accept-button" id="<%=request.id%>">Accept</button>
+              <button data-toggle="collapse" data-target="#view<%= request.id %>" class="btn btn-success btn-sm pull-right btn-user">Details</button>
+              <p><strong><%= request.user.name %></strong></p>
+            </div>
+            <!-- user request dropdown -->
+            <div id="view<%=request.id%>" class="collapse">
+              <div class="clearfix"></div><br>
+              <% if request.comment %>
+              <p><strong>Comments:</strong> <%= request.comment %></p>
+              <% else %>
+              <p><strong>No comments</strong></p>
+              <% end %>
+              <p><strong>Boards: <%= request.boards %></strong></p>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </ul>
+
+        <!-- user request if true -->
+        <% else %>
+        <ul class="list-group">
+          <a class="list-group-item user-accepted">
+            <div>
+              <!-- user request buttons -->
+              <button class="btn btn-success btn-sm pull-right accept-button disabled" id="<%=request.id%>">Accepted!</button>
+              <button data-toggle="collapse" data-target="#view<%= request.id %>" class="btn btn-success btn-sm pull-right btn-user">Details</button>
+              <p><strong><%= request.user.name %></strong> is going to <%= request.trip.destination %> with you!</p>
+            </div>
+            <!-- user request dropdown -->
+            <div id="view<%=request.id%>" class="collapse">
+              <div class="clearfix"></div><br>
+              <% if request.comment %>
+              <p><strong>Comments:</strong> <%= request.comment %></p>
+              <% else %>
+              <p><strong>No comments</strong></p>
+              <% end %>
+              <p><strong>Boards: <%= request.boards %></strong></p>
+              <p><strong>Email:</strong> <%= request.user.email %></p>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </ul>
+        <% end %>
+        <!-- end of loop -->
+        <% end %>
+        <!-- if requests don't exist -->
+        <% else %>
+        <div class="panel-body">
+          <h5>No one wants to go surfing with you... yet!</h5>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <!-- if trips don't exists -->
+    <% else %>
+    <div class="panel-body">
+      <p>You have not created any trips...</p>
+      <a href="/trips/new" class="btn btn-primary pull-left" role="button">Create Trip</a>
+    </div>
+    <% end %>
+  </div>
+  <div class="col-md-4 created-trips-box text-center">
+       <div class="box">
+           <div class="box-content">
+               <h3 class="tag-title">Created Trips</h3>
+               <hr />
+               <p>You will find the trips you have created to your left. If a user requests to join, you will be able to see his profile and request message below each trip. Once accepted, you will gain access to his phone number and email so you can get in touch! </p>
+               <br />
+               <a href="ppc.html" class="btn btn-block btn-default">Profile</a>
+               <a href="ppc.html" class="btn btn-block btn-primary">Created Trips</a>
+               <a href="ppc.html" class="btn btn-block btn-default">Requested Trips</a>
+           </div>
+       </div>
+  </div>
+</div>
+
+<div class="row requested-trips">
+  <div class="col-md-8 requested-trips">
+    <!-- Requested trips -->
+    <div class="page-header">
+      <h4>Requested Trips</h4>
+    </div>
+
+    <!-- if trips exist -->
+    <% if @requested_trips.length > 0 %>
+    <% @requested_trips.each do |trip| %>
+    <div class=" created-trips">
       <div class="panel panel-default panel-primary">
 
         <!-- Trip details panel -->
@@ -40,150 +194,63 @@
         <div class="panel-body">
           <p><strong>Departing from:</strong> <%= trip.origin %></p>
           <p><strong>Kind of trip:</strong> <%= trip.kind_of_trip %></p>
-          <p><strong>Price:</strong> <%= trip.price %></p>
           <p><strong>Departing:</strong> <%= trip.start_date %></p>
           <p><strong>Coming back:</strong> <%= trip.finish_date %></p>
           <p><strong>Empty seats:</strong> <%= trip.max_users %></p>
           <p><strong>Board Space:</strong> <%= trip.space_material %></p>
           <p><strong>Description:</strong> <%= trip.description %></p>
-        </div>
-
-        <!-- user requests -->
-        <!-- if requests exist-->
-        <% if trip.requests.length > 0 %>
-          <div class="panel-body">
-            <h4>The following users have requested to join:</h4>
-          </div>
-          <% trip.requests.each do |request| %>
-          <!-- user request if false -->
-            <% if request.status == false %>
-              <ul class="list-group">
-                <a class="list-group-item">
-                  <div>
-                    <!-- user request buttons -->
-                    <button class="btn btn-warning btn-sm pull-right accept-button" id="<%=request.id%>">Accept</button>
-                    <button data-toggle="collapse" data-target="#view<%= request.id %>" class="btn btn-success btn-sm pull-right btn-user">Details</button>
-                    <p><strong><%= request.user.name %></strong></p>
-                  </div>
-                  <!-- user request dropdown -->
-                  <div id="view<%=request.id%>" class="collapse">
-                    <div class="clearfix"></div><br>
-                    <% if request.comment %>
-                      <p><strong>Comments:</strong> <%= request.comment %></p>
-                    <% else %>
-                      <p><strong>No comments</strong></p>
-                    <% end %>
-                    <p><strong>Boards: <%= request.boards %></strong></p>
-                  </div>
-                  <div class="clearfix"></div>
-                </a>
-              </ul>
-
-            <!-- user request if true -->
-            <% else %>
-              <ul class="list-group">
-                <a class="list-group-item user-accepted">
-                  <div>
-                    <!-- user request buttons -->
-                    <button class="btn btn-success btn-sm pull-right accept-button disabled" id="<%=request.id%>">Accepted!</button>
-                    <button data-toggle="collapse" data-target="#view<%= request.id %>" class="btn btn-success btn-sm pull-right btn-user">Details</button>
-                    <p><strong><%= request.user.name %></strong> is going to <%= request.trip.destination %> with you!</p>
-                  </div>
-                  <!-- user request dropdown -->
-                  <div id="view<%=request.id%>" class="collapse">
-                    <div class="clearfix"></div><br>
-                    <% if request.comment %>
-                      <p><strong>Comments:</strong> <%= request.comment %></p>
-                    <% else %>
-                      <p><strong>No comments</strong></p>
-                    <% end %>
-                      <p><strong>Boards: <%= request.boards %></strong></p>
-                      <p><strong>Email:</strong> <%= request.user.email %></p>
-                  </div>
-                  <div class="clearfix"></div>
-                </a>
-              </ul>
-            <% end %>
-        <!-- end of loop -->
+          <% @status = trip.requests.find_by(user_id: current_user.id).status %>
+          <% if @status == false %>
+          <p><strong>Status:</strong> Not accepted Yet </p>
+          <% else %>
+          <p><strong>Status:</strong> Accepted! You're going to <%= trip.destination %>. Please get in touch with <%= trip.user.name %>, his details are below. </p>
           <% end %>
-        <!-- if requests don't exist -->
-        <% else %>
+        </div>
         <div class="panel-body">
-          <h4>No one wants to go surfing with you... yet!</h4>
+          <h4>Created by</h4>
         </div>
-        <% end %>
+
+        <!-- trip user creator -->
+        <ul class="list-group">
+          <a class="list-group-item">
+            <strong><%= trip.user.name %></strong>
+            <button data-toggle="collapse" data-target="#creator<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
+            <div id="creator<%= trip.id %>" class="collapse">
+              <p><strong>Name:</strong> <%= trip.user.name %></p>
+              <p><strong>Email:</strong> <%= trip.user.email %></p>
+              <% if @status == false %>
+              <p><strong>Phone: </strong>*********</p>
+              <% else %>
+              <p><strong>Phone:</strong> <%= trip.user.phone_number %></p>
+              <% end %>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </ul>
       </div>
-    <% end %>
-  </div>
-
-  <!-- if trips don't exists -->
-  <% else %>
-  <div class="panel-body">
-    <p>You have not created any trips...</p>
-    <a href="/trips/new" class="btn btn-primary pull-left" role="button">Create Trip</a>
-  </div>
-  <% end %>
-
-  <!-- Requested trips -->
-  <div class="container requested-trips">
-    <div class="row">
-      <h4>Requested Trips</h4>
     </div>
-  </div>
-
-  <!-- if trips exist -->
-  <% if @requested_trips %>
-    <% @requested_trips.each do |trip| %>
-      <div class="row created-trips">
-        <div class="panel panel-default panel-primary">
-
-          <!-- Trip details panel -->
-          <div class="panel-heading">Trip to <%= trip.destination %>, <%= trip.country_destination %></div>
-          <div class="panel-body">
-            <p><strong>Departing from:</strong> <%= trip.origin %></p>
-            <p><strong>Kind of trip:</strong> <%= trip.kind_of_trip %></p>
-            <p><strong>Departing:</strong> <%= trip.start_date %></p>
-            <p><strong>Coming back:</strong> <%= trip.finish_date %></p>
-            <p><strong>Empty seats:</strong> <%= trip.max_users %></p>
-            <p><strong>Board Space:</strong> <%= trip.space_material %></p>
-            <p><strong>Description:</strong> <%= trip.description %></p>
-            <% @status = trip.requests.find_by(user_id: current_user.id).status %>
-            <% if @status == false %>
-            <p><strong>Status:</strong> Not accepted Yet </p>
-            <% else %>
-            <p><strong>Status:</strong> Accepted! You're going to <%= trip.destination %>. Please get in touch with <%= trip.user.name %>, his details are below. </p>
-            <% end %>
-          </div>
-          <div class="panel-body">
-            <h4>Created by</h4>
-          </div>
-
-          <!-- trip user creator -->
-          <ul class="list-group">
-            <a class="list-group-item">
-              <strong><%= trip.user.name %></strong>
-              <button data-toggle="collapse" data-target="#creator<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
-              <div id="creator<%= trip.id %>" class="collapse">
-                <p><strong>Name:</strong> <%= trip.user.name %></p>
-                <p><strong>Email:</strong> <%= trip.user.email %></p>
-                <% if @status == false %>
-                <p><strong>Phone: </strong>*********</p>
-                <% else %>
-                <p><strong>Phone:</strong> <%= trip.user.phone_number %></p>
-                <% end %>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </ul>
-        </div>
-      </div>
     <% end %>
 
-  <!-- If no trips requested -->
-  <% else %>
-  <div class="container panel-body">
-    <p>You have not requested to join any trips</p>
-    <a href="/" class="btn btn-primary pull-left" role="button">Find Trips</a>
+    <!-- If no trips requested -->
+    <% else %>
+    <div class="panel-body">
+      <p>You have not requested to join any trips</p>
+      <a href="/" class="btn btn-primary pull-left" role="button">Find Trips</a>
+    </div>
+    <% end %>
   </div>
-  <% end %>
+  <div class="col-md-4 requested-trips-box text-center">
+       <div class="box">
+           <div class="box-content">
+               <h3 class="tag-title">Requested Trips</h3>
+               <hr />
+               <p>You will find the trips you have created to your left. If a user requests to join, you will be able to see his profile and request message below each trip. Once accepted, you will gain access to his phone number and email so you can get in touch! </p>
+               <br />
+               <a href="ppc.html" class="btn btn-block btn-default">Profile</a>
+               <a href="ppc.html" class="btn btn-block btn-default">Created Trips</a>
+               <a href="ppc.html" class="btn btn-block btn-primary">Requested Trips</a>
+           </div>
+       </div>
+  </div>
+</div>
 </div>

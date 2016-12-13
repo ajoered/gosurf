@@ -61,6 +61,12 @@
          <%= f.text_field :bio, autofocus: true, class: 'form-control'  %>
      </div>
  </div>
+ <div class="form-group">
+     <%= f.label :phone_number, class: 'col-sm-2 control-label'  %>
+     <div class="col-sm-6">
+         <%= f.text_field :phone_number, autofocus: true, class: 'form-control'  %>
+     </div>
+ </div>
 
  <div class="form-group">
      <%= f.label :email, class: 'col-sm-2 control-label'  %>
@@ -70,7 +76,7 @@
  </div>
 
  <div class="form-group">
-     <%= f.label :password, class: 'col-sm-2 control-label'  %> <i>(leave blank if you don't want to change it)</i>
+     <%= f.label :password, class: 'col-sm-2 control-label'  %> <i>New password</i>
      <div class="col-sm-6">
          <%= f.password_field :password, autocomplete: "off", class: 'form-control'  %>
      </div>
@@ -78,7 +84,7 @@
 
 
  <div class="form-group">
-     <%= f.label :password_confirmation, class: 'col-sm-2 control-label' %>
+     <%= f.label :password_confirmation, class: 'col-sm-2 control-label' %> <i>New password confirmation</i>
      <div class="col-sm-6">
          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'  %>
      </div>
@@ -97,13 +103,12 @@
      </div>
  </div>
 
- <div class="form-group">
-     <div class="col-sm-offset-2 col-sm-6">
-         <%= render "devise/shared/links" %>
-     </div>
- </div>
  <% end %>
 
- <h5>Cancel my account</h5>
+<div class="panel panel-default">
+  <div class="container">
+ <h5></h5>
 
  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-default btn-xs' %></p>
+ </div>
+ </div>

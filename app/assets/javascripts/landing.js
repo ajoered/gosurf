@@ -142,7 +142,7 @@ function initMap(response) {
 						var tripData = {trip_id: trip.id, comment: comment};
 							$.ajax({
 								type: "POST",
-								url: "/requests/create",
+								url: "api/requests/create",
 								data: tripData,
 								success: function(response){
 									resolve(response);

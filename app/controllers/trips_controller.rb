@@ -52,8 +52,9 @@ class TripsController < ApplicationController
       redirect_to new_user_session_path, notice: 'Access forbidden.'
     end
   end
-  #
-  # def trip_params
-  #   params.require(:country).permit(:start_date, :description)
-  # end
+
+  def user_params
+    params.require(:trip).permit(:level, :price, :description, :kind_of_trip, :origin, :destination, :start_date, :finish_date, :max_users, :space_material, :country_origin, :country_destination, :origin_lat, :origin_lng, :destination_lat, :destination_lng)
+  end
+
 end

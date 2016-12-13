@@ -64,11 +64,12 @@ function createTrip(event) {
     space_material: $('#trip_space_material').val(),
     description: $('#trip_description').val()
   }
-  // 
-  // tripJson.forEach(function(element) {
-  //   if (element.key)
-  //
-  // });
+
+// for (var key in tripJson) {
+//   if (tripJson(key) === "") {
+//       console.log(key)
+//   }
+// }
 
 console.log(tripJson);
     $.ajax({
@@ -76,7 +77,7 @@ console.log(tripJson);
       url: "/trips/create",
       data: tripJson,
       success: function(response){
-                window.location = '/';
+                window.location = '/profile';
         console.log(response);
 
         }

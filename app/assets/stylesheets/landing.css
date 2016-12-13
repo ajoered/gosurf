@@ -24,7 +24,6 @@ html, body {
 .navbar-right>li>a {
   padding-top: 22px;
   padding-right: 20px;
-
 }
 
 .navbar {
@@ -113,10 +112,14 @@ section {
   text-align: center;
   background-color: rgba(128, 128, 128, 0.3);
   margin: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .panel-request {
   text-align: left;
   background-color: #132038;
   color: #ccc;
+  margin:15px;
+  border-color: #132038;
 }

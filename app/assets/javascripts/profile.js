@@ -9,7 +9,7 @@ function acceptRequest(event) {
 
   $.ajax({
     type: "POST",
-    url: "/requests/approve",
+    url: "api/requests/approve",
     data: id,
     success: function (response) {
 			changeVisualElementsButton(response, event)
