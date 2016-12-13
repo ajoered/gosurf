@@ -24,10 +24,10 @@
                   <hr class="intro-divider">
                   <ul class="list-inline intro-social-buttons">
                     <li>
-                      <a class="btn btn-default btn-lg find-trip">Find Trip</a>
+                      <a data-scroll href="#search-button" class="btn btn-default btn-lg find-trip">Find Trip</a>
                     </li>
                     <li>
-                      <a class="btn btn-default btn-lg">Create Trip</a>
+                      <a href="/trips/new" class="btn btn-default btn-lg">Create Trip</a>
                     </li>
                   </ul>
                 </div>
@@ -57,7 +57,7 @@
           { class: 'form-control', id: "country" }
           ) %> -->
           <span class="input-group-btn">
-            <button type="button" class="page-scroll btn btn-default btn-xl sr-button search_button" id="search-button">Search</button>
+            <button data-scroll href="#map" type="button" class="page-scroll btn btn-default btn-xl sr-button search_button" id="search-button">Search</button>
           </span>
         </div>
       </div>
@@ -67,3 +67,13 @@
 
 
 <div id="map" class="map-area"></div>
+
+<script>
+    smoothScroll.init({
+    selector: '[data-scroll]',
+    speed: 1000, // Integer. How fast to complete the scroll in milliseconds
+    easing: 'easeInOutCubic',
+    offset: 290
+  });
+
+</script>

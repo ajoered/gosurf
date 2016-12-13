@@ -64,6 +64,11 @@ function createTrip(event) {
     space_material: $('#trip_space_material').val(),
     description: $('#trip_description').val()
   }
+  // 
+  // tripJson.forEach(function(element) {
+  //   if (element.key)
+  //
+  // });
 
 console.log(tripJson);
     $.ajax({

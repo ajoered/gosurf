@@ -111,28 +111,28 @@ function initMap(response) {
 		marker.addListener('click', function swalAlert() {
 
 			swal({
-			  title: 'Trip to ' + trip.destination,
+			  title: 'Trip Details',
 			  input: 'text',
 				html:
-				'<div class="row created-trips">' +
-		    '<div class="panel panel-default panel-primary">' +
-				'<div class="panel-heading">Trip Details' +
-		    '<div class="panel-body">' +
-          '<p><b>Leaving from: </b>' + trip.origin + '</p>' +
-					'<p><b>Kind of trip: </b>' + trip.kind_of_trip + '</p>' +
-					'<p><b>Level: </b>' + trip.level + '</p>' +
-					'<p><b>Price: </b>' + trip.price + '</p>' +
-					'<p><b>Departing: </b>' + trip.start_date + '</p>' +
-					'<p><b>Coming back: </b>' + trip.finish_date + '</p>' +
-					'<p><b>Empty seats: </b>' + trip.max_users + '</p>' +
-					'<p><b>Board Space: </b>' + trip.space_material + '</p>' +
-					'<p><b>Description: </b>' + trip.description + '</p>' +
+				'<div class="row panel-group panel-primary">' +
+		    '<div class="panel panel-primary panel-request">' +
+		    '<div class="panel-body panel-body-requests">' +
+					'<b>From: </b>' + trip.origin + '<br>' +
+          '<b>To: </b>' + trip.destination + '<br>' + '<br>' +
+					'<b>Kind of trip: </b>' + trip.kind_of_trip + '<br>' +
+					'<b>Level: </b>' + trip.level + '<br>' +
+					'<b>Price/seat: </b>' + trip.price + '<br>' +
+					'<b>Departing: </b>' + trip.start_date + '<br>' +
+					'<b>Coming back: </b>' + trip.finish_date + '<br>' +
+					'<b>Empty seats: </b>' + trip.max_users + '<br>' +
+					'<b>Board Space: </b>' + trip.space_material + '<br>' + '<br>' +
+					'<b>Description: </b>' + trip.description + '<br>' +
 	        '</div>' +
 				'</div>' +
 			'</div>' +
-			'<div class="row created-trips">' +
-				"<p>Want to join?</p>" +
-				"Message:" +
+			'<div class="row">' +
+				"<p>Want to go surfing? Request to join!</p>" +
+				"Send the owner a message:" +
 			'</div>',
 			  showCancelButton: true,
 			  confirmButtonText: 'Send Request',

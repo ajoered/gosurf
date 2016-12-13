@@ -38,7 +38,7 @@ class Trip < ApplicationRecord
   end
 
   def same_user_request(user_id)
-    (self.requests.where(user_id: user_id))? true : false
+    (self.requests.where(user_id: user_id) === [])? false : true
   end
-
+  
 end
