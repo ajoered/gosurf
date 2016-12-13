@@ -10,12 +10,12 @@ html, body {
     text-transform: uppercase;
 } 
 
-.navbar-brand {
+/*.letters {
   padding-top: 22px;
-  font-size: 22px;
+  font-size: 35px;
   color: rgb(245, 245, 245); 
   font-family: 'Architects Daughter', cursive;
-}
+}*/
 
 .navbar-inverse .navbar-nav>li>a {
     color: #e0e0e0;
@@ -28,6 +28,13 @@ html, body {
 
 .navbar {
   min-height: 64px;
+}
+
+.navbar-image {
+  height: 60px;
+  width: auto;
+  padding: 2px;
+  margin-left: -20px;
 }
 
 #search {
@@ -50,7 +57,6 @@ p {
   padding: 0px 0;
   height: 100%;
   width:100%;
-  visibility: hidden;
   }
 
 #map {

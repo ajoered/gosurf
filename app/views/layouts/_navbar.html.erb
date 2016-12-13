@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">GOSURF</a>
+      <a href="/" class="navbar-left navbar-image"><img src="/assets/final_logo_white.png" class="navbar-image"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -41,7 +41,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand topnav" href="/">GOSURF</a>
+      <a href="/" class="navbar-left navbar-image"><img src="/assets/final_logo_white.png" class="navbar-image"></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -67,3 +67,12 @@
   </div>
   <!-- /.container -->
 </nav>
+
+<script>
+   $(function() {
+      $('.nav li a').click(function() {
+         $('.nav li').removeClass();
+         $($(this).attr('href')).addClass('active');
+      });
+   });
+</script>

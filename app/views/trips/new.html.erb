@@ -1,5 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <%= javascript_include_tag '/assets/create' %>
 
 <section class="form-header">
@@ -17,20 +18,12 @@
         <div class="form-group">
       	  <%= f.label :origin %>
       	  <%= f.text_field :origin, class: "js-search-origin form-control", onFocus: "geolocate()", type: "text"%>
+          <%= f.text_field :country_origin, class: "js-country-origin field form-control", disabled: "true"%>
         </div>
 
         <div class="form-group">
           <%= f.label :destination %>
           <%= f.text_field :destination, class: "js-search-destination form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :country_origin %>
-          <%= f.text_field :country_origin, class: "js-country-origin field form-control", disabled: "true"%>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :country_destination %>
           <%= f.text_field :country_destination, class: "js-country-destination field form-control", disabled: "true"%>
         </div>
 
@@ -46,8 +39,7 @@
 
         <div class="form-group">
           <%= f.label :price %>
-          <%= f.number_field :price, class: "form-control" %>
-          <small id="emailHelp" class="form-text text-muted">Price/seat</small>
+          <%= f.number_field :price, class: "form-control", placeholder: "Price/seat" %>
         </div>
 
         <!-- <div class="container_search_map">
@@ -65,34 +57,33 @@
 
       <div class="col-lg-5">
         <h3>Additional Info</h3>
+          <p>The more info the better!</p>
         <hr>
-          <p>Hey <%= current_user.name %>! Creating a trip?</p>
+
 
           <div class="form-group">
             <%= f.label :level %>
             <%= f.select(:level, [['Beginner'], ['Intermediate'], ['Advanced'], ['Expert']],{}, { :class => 'form-control' } ) %>
-            <small id="emailHelp" class="form-text text-muted">Beginner, Intermediate or Advanced!</small>
           </div>
 
           <div class="form-group">
             <%= f.label :kind_of_trip %>
             <%= f.select(:kind_of_trip, [['Group'], ['Riding Solo']], {}, { :class => 'form-control' } ) %>
-            <small id="emailHelp" class="form-text text-muted">Determine whether you're looking to go in a group or riding solo.</small>
           </div>
 
           <div class="form-group">
             <%= f.label :max_users %>
-            <%= f.text_field :max_users, class: "form-control" %>
+            <%= f.text_field :max_users, class: "form-control", placeholder: "How many people can you take?" %>
           </div>
 
           <div class="form-group">
             <%= f.label :space_material %>
-            <%= f.number_field :space_material, class: "form-control" %>
+            <%= f.number_field :space_material, class: "form-control", placeholder: "How many boards can you take?" %>
           </div>
 
           <div class="form-group">
             <%= f.label :description %>
-            <%= f.text_field :description, class: "form-control" %>
+            <%= f.text_field :description, class: "form-control", placeholder: "People love to hear about your trip... be as eloquent as possible!" %>
           </div>
 
           <button type="button" class="btn btn-success" id="create-trip-btn">Create a trip!</button>

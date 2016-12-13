@@ -29,4 +29,5 @@
 }*/
 .red{
   border-color: rgba(249, 123, 61, 0.89);
+  box-shadow: 0 0 5px rgba(212, 61, 61, 0.89);
 }

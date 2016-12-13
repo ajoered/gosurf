@@ -1,3 +1,5 @@
+var image = 'http://res.cloudinary.com/divgxbjh0/image/upload/v1481653467/logo_transparente_hsv4qb.png'
+
 $(document).on('ready', initialize);
 
 function initialize() {
@@ -103,13 +105,18 @@ function initMap(response) {
 	    strokeWeight: 2
 	  });
 
+		var icon = {
+	    url: image,
+	    scaledSize: new google.maps.Size(40, 40)
+	  };
+
 		var marker = new google.maps.Marker({
 	    position: destinationCoordinates,
 	    map: map,
-			title: 'Surftrip'
+			title: 'Surftrip',
+			icon: icon
 	  });
 		marker.addListener('click', function swalAlert() {
-console.log(trip.start_date);
 			swal({
 			  title: 'Trip Details',
 			  input: 'text',
