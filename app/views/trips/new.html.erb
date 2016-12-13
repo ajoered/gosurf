@@ -3,16 +3,16 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <%= javascript_include_tag '/assets/create' %>
 
-<section class="form-header">
-  <div class="container">
+
+  <div class="container-fluid">
     <div class="row panel">
 
       <%= form_for [@trip] do |f| %>
 
-      <div class="col-lg-5">
+      <div class="col-lg-4 create-form-1">
 
-        <h3>Create a new trip!</h3>
-        <p>First tell us your planned itinerary...</p>
+        <h3 class="text-center">1. Basic Information</h3>
+        <p class="text-center">First tell us where and when...</p>
         <hr>
 
         <div class="form-group">
@@ -37,29 +37,17 @@
           <%= f.date_field :finish_date, class: "form-control" %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :price %>
-          <%= f.number_field :price, class: "form-control", placeholder: "Price/seat" %>
-        </div>
-
-        <!-- <div class="container_search_map">
-          <div id='input'>
-            <input id='gmaps-input-address' placeholder='Start typing a place name...' type='text' />
-            <div id='gmaps-error'></div>
-          </div>
-          <div id='gmaps-canvas'></div>
-        </div> -->
-
       </div>
 
-      <div class="col-lg-2">
-      </div>
-
-      <div class="col-lg-5">
-        <h3>Additional Info</h3>
-          <p>The more info the better!</p>
+      <div class="col-lg-4 create-form-2">
+        <h3 class="text-center">2. Additional Info</h3>
+          <p class="text-center">The more info the better!</p>
         <hr>
 
+          <div class="form-group">
+            <%= f.label :price %>
+            <%= f.number_field :price, class: "form-control", placeholder: "Price/seat" %>
+          </div>
 
           <div class="form-group">
             <%= f.label :level %>
@@ -86,10 +74,28 @@
             <%= f.text_field :description, class: "form-control", placeholder: "People love to hear about your trip... be as eloquent as possible!" %>
           </div>
 
-          <button type="button" class="btn btn-success" id="create-trip-btn">Create a trip!</button>
+
+        </div>
+        <div class="col-lg-4 create-info">
+          <div class="box">
+              <div class="box-content">
+                  <h3 class="tag-title">Create a trip!</h3>
+                  <hr />
+                  <h4>More Info...</h4>
+                  <a class="btn btn-block btn-primary">Origin/Destination</a>
+                  <a class="btn btn-block btn-default">Dates</a>
+                  <a class="btn btn-block btn-default">Price</a>
+                  <a class="btn btn-block btn-default">Level</a>
+                  <a class="btn btn-block btn-default">Kind of Trip</a>
+                  <a class="btn btn-block btn-default">Max Users</a>
+                  <a class="btn btn-block btn-default">Space for material</a>
+                  <br />
+                  <button type="button" class="btn btn-success" id="create-trip-btn">Create a trip!</button>
+              </div>
+          </div>
+
         </div>
 
       <% end %>
       </div>
     </div>
-  </section>

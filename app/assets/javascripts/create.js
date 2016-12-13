@@ -107,6 +107,4 @@ function createTrip(event) {
     emptyInputs.forEach(function(e) {e.classList.add('red') })
   }
 
-
-
 }
