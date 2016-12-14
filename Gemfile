@@ -1,3 +1,4 @@
+ruby '2.3.1'
 source 'https://rubygems.org'
 
 gem 'rails_12factor', group: :production
