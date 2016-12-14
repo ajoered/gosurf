@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'rails_12factor', group: :production
 gem 'phony_rails'
 gem 'country_select', git: 'https://github.com/alibabajan/country_select.git'
 gem 'geocoder'
