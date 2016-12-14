@@ -3,12 +3,14 @@ var imageMarker = 'https://res.cloudinary.com/divgxbjh0/image/upload/v1481653467
 $(document).on('ready', initialize);
 
 function initialize() {
+	console.log("Landing initialize");
 	$('#search-button').on('click', fetchTrips);
 
 	var searchAutocomplete = createAutocomplete({
 		input: $('.js-search-trip'),
 		output: $('.js-country-trip'),
 		getPlace: function (place) {
+			console.log("Geolocation initialized");
       var country = "";
       place.address_components.forEach(function (address_component) {
         if (address_component.types[0].toLowerCase() === "country") {
@@ -21,6 +23,7 @@ function initialize() {
 };
 
 function createAutocomplete(options) {
+	console.log("Create autocomplete");
   var input = options.input
   var output = options.output
   var getPlace = options.getPlace;
@@ -36,6 +39,7 @@ function createAutocomplete(options) {
 };
 
 function fetchTrips(event) {
+	console.log("Fetch trips");
 	event.preventDefault();
 	$('.map-area').css('visibility', 'visible');
   var country = {country_origin: $('.js-country-trip').val()};
@@ -50,6 +54,7 @@ function fetchTrips(event) {
 }
 
 function initMap(response) {
+	console.log("init map");
 	var tripsArray = response;
 	console.log(tripsArray.country);
 
