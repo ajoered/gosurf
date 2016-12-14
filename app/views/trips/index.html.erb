@@ -47,9 +47,9 @@
         <div class="search_form">
 
           <!-- <%= text_field_tag :country, {}, class: 'form-control', id: 'country', placeholder: 'Enter Country' %> -->
-            <%= text_field_tag :search, value = nil, class: "js-search-trip form-control", onFocus: "geolocate()", type: "text"%>
+            <%= text_field :search, value = nil, class: "js-search-trip form-control", type: "text"%>
 
-            <%= text_field_tag :country_search, value = nil, class: "js-country-trip form-control hidden", disabled: "true"%>
+            <%= text_field :country_search, value = nil, class: "js-country-trip form-control hidden", disabled: "true"%>
           <!-- <%= country_select(
           "country",
           { priority_countries: ["ES", "US"] },

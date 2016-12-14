@@ -1,4 +1,4 @@
-var image = 'http://res.cloudinary.com/divgxbjh0/image/upload/v1481653467/logo_transparente_hsv4qb.png'
+var imageMarker = 'http://res.cloudinary.com/divgxbjh0/image/upload/v1481653467/logo_transparente_hsv4qb.png'
 
 $(document).on('ready', initialize);
 
@@ -56,8 +56,7 @@ function initMap(response) {
 	if (tripsArray.country) {//sets map on country if no results for API query
 
 		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 5,
-			center: {lat: -34.397, lng: 150.644}
+			zoom: 5
 		});
 
 		var geocoder = new google.maps.Geocoder();
@@ -106,7 +105,7 @@ function initMap(response) {
 	  });
 
 		var icon = {
-	    url: image,
+	    url: imageMarker,
 	    scaledSize: new google.maps.Size(40, 40)
 	  };
 
