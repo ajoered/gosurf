@@ -50,7 +50,9 @@ function createAutocomplete(options) {
 function createTrip(event) {
   event.preventDefault();
   const inputs = Array.from(document.querySelectorAll('input'))
-  const emptyInputs = inputs.filter((input) => input.value === "" );
+  const emptyInputs = inputs.filter(function(input) {
+    return input.value === "";
+  });
 
   if (emptyInputs.length === 0) {
     var tripJson = {
@@ -87,7 +89,9 @@ function createTrip(event) {
       text: "",
       timer: 1000
     })
-    emptyInputs.forEach(function(e) {e.classList.add('red') })
+    emptyInputs.forEach(function(e) {
+      e.classList.add('red');
+    });
   }
 
 }
