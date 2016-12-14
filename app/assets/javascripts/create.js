@@ -43,8 +43,6 @@ function createAutocomplete(options) {
     var place = autocomplete.getPlace();
     output.val(getPlace(place));
   });
-
-  return autocomplete;
 }
 
 function createTrip(event) {

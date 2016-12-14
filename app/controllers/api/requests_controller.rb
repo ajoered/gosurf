@@ -5,36 +5,29 @@ class Api::RequestsController < ApplicationController
   def approve
     @request = Request.find_by(id: params[:id])
     if @request.trip.reached_max_users
-      max_user_json = {status: 4}
-      render json: max_user_json
+      render json: {status: 4}
     else
       @request.approve
-      request_success_json = {status: 3}
-      render json: request_success_json
+      render json: {status: 3}
     end
   end
 
   def create
     if user_signed_in?
       if @trip.check_user_is_owner(current_user.id)
-        check_user_is_owner = {status: 1}
-        render json: check_user_is_owner
+        render json: {status: 1}
       elsif @trip.reached_max_users
-        max_user_json = {status: 4}
-        render json: max_user_json
+        render json: {status: 4}
       elsif @trip.same_user_request(current_user.id)
-        doubled_request_json = {status: 5}
-        render json: doubled_request_json
+        render json: {status: 5}
       else
         @request = current_user.requests.create(
               trip_id: params[:trip_id],
               comment: params[:comment])
-        request_success_json = {status: 3}
-        render json: request_success_json
+        render json: {status: 3}
       end
     else
-      no_user_json = {status: 2}
-      render json: no_user_json
+      render json: {status: 2}
       @error = "You must be logged in to create a trip!"
     end
   end
