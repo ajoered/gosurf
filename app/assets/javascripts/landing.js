@@ -1,4 +1,4 @@
-var imageMarker = 'http://res.cloudinary.com/divgxbjh0/image/upload/v1481653467/logo_transparente_hsv4qb.png'
+var imageMarker = 'https://res.cloudinary.com/divgxbjh0/image/upload/v1481653467/logo_transparente_hsv4qb.png'
 
 $(document).on('ready', initialize);
 
