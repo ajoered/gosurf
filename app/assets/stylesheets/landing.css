@@ -10,13 +10,6 @@ html, body {
     text-transform: uppercase;
 } 
 
-/*.letters {
-  padding-top: 22px;
-  font-size: 35px;
-  color: rgb(245, 245, 245); 
-  font-family: 'Architects Daughter', cursive;
-}*/
-
 .navbar-inverse .navbar-nav>li>a {
   color: #e0e0e0;
 }
@@ -43,6 +36,9 @@ html, body {
 
 #search {
   background-color: #132038;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
 }
 
 #search_button {
@@ -75,8 +71,6 @@ p {
 #uvp {
   font-size: 100px;
   font-family: 'Amatic SC', cursive;
-
-
 }
 
 .intro-header {
@@ -108,9 +102,9 @@ p {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 }
 
-section {
+/*section {
   padding: 60px 0;
-}
+}*/
 
 .section-heading {
   color: #f4f4f4;
@@ -127,9 +121,11 @@ section {
 .navbar-footer {
   text-align: center;
   background-color: rgba(128, 128, 128, 0.3);
+  position: relative;
+  bottom: 0;
+  width: 100%;
   margin: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 30px;
 }
 
 .panel-request {

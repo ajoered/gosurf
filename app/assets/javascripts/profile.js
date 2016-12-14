@@ -1,6 +1,6 @@
-$(document).on('ready', initialize);
+$(document).on('ready', initializeProfile);
 
-function initialize() {
+function initializeProfile() {
 	$('.accept-button').on('click', acceptRequest);
 }
 

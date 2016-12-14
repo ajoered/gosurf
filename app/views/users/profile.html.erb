@@ -1,3 +1,5 @@
+<%= javascript_include_tag '/assets/profile' %>
+
 <div class="container-fluid">
 <div class="row main-profile">
   <div class="col-md-8 main-profile">
@@ -10,7 +12,7 @@
 
     <div class="panel-group">
       <div class="panel panel-default panel-primary">
-        <div class="panel-heading">
+        <div class="panel-heading" style="padding-bottom: 15px;"">
           <p class="panel-title">
             <button class="btn btn-default btn-sm pull-right btn-edit"><%= link_to 'Edit', edit_user_registration_path %></button>
             <small>My Profile</small>
@@ -31,7 +33,7 @@
     </div>
   </div>
 
-  <div class="col-md-4 main-profile-box text-center">
+  <div class="col-md-4 main-profile-box text-center" id="profile">
     <div class="page-header">
       <h2>Welcome!</h2>
     </div>
@@ -41,16 +43,16 @@
                <hr />
                <p>You may view and edit your profile, access your created trips and manage requests.</p>
                <br />
-               <a href="ppc.html" class="btn btn-block btn-primary">Profile</a>
-               <a href="ppc.html" class="btn btn-block btn-default">Created Trips</a>
-               <a href="ppc.html" class="btn btn-block btn-default">Requested Trips</a>
+               <a class="btn btn-block btn-primary">Profile</a>
+               <a data-scroll href="#created" class="btn btn-block btn-default">Created Trips</a>
+               <a data-scroll href="#requested" class="btn btn-block btn-default">Requested Trips</a>
            </div>
        </div>
   </div>
 </div>
       <!-- Trips section -->
 
-<div class="row created-trips">
+<div class="row created-trips" id="created">
   <div class="col-md-8 created-trips">
     <!-- Created trips -->
     <div class="page-header">
@@ -59,7 +61,7 @@
     <!-- If trips exist -->
     <% if @trips.length > 0 %>
     <% @trips.each do |trip| %>
-    <div class=" created-trips">
+    <div class=" created-trips" >
       <div class="panel panel-default panel-primary">
 
         <!-- Trip details panel -->
@@ -162,17 +164,18 @@
            <div class="box-content">
                <h3 class="tag-title">Created Trips</h3>
                <hr />
-               <p>You will find the trips you have created to your left. If a user requests to join, you will be able to see his profile and request message below each trip. Once accepted, you will gain access to his phone number and email so you can get in touch! </p>
+               <p>Click the name for more info. If a user requests to join, you will be able to see his profile and request message below each trip.</p>
+               <p>Once accepted, you will gain access to his phone number and email so you can get in touch! </p>
                <br />
-               <a href="ppc.html" class="btn btn-block btn-default">Profile</a>
-               <a href="ppc.html" class="btn btn-block btn-primary">Created Trips</a>
-               <a href="ppc.html" class="btn btn-block btn-default">Requested Trips</a>
+               <a data-scroll href="#profile" class="btn btn-block btn-default">Profile</a>
+               <a data-scroll href="#created" class="btn btn-block btn-primary">Created Trips</a>
+               <a data-scroll href="#requested" class="btn btn-block btn-default">Requested Trips</a>
            </div>
        </div>
   </div>
 </div>
 
-<div class="row requested-trips">
+<div class="row requested-trips" id="requested">
   <div class="col-md-8 requested-trips">
     <!-- Requested trips -->
     <div class="page-header">
@@ -182,6 +185,8 @@
     <!-- if trips exist -->
     <% if @requested_trips.length > 0 %>
     <% @requested_trips.each do |trip| %>
+    <% @status = trip.requests.find_by(user_id: current_user.id).status %>
+    <% if @status == false %>
     <div class=" created-trips">
       <div class="panel panel-default panel-primary">
 
@@ -195,15 +200,10 @@
           <p><strong>Empty seats:</strong> <%= trip.max_users %></p>
           <p><strong>Board Space:</strong> <%= trip.space_material %></p>
           <p><strong>Description:</strong> <%= trip.description %></p>
-          <% @status = trip.requests.find_by(user_id: current_user.id).status %>
-          <% if @status == false %>
           <p><strong>Status:</strong> Not accepted Yet </p>
-          <% else %>
-          <p><strong>Status:</strong> Accepted! You're going to <%= trip.destination %>. Please get in touch with <%= trip.user.name %>, his details are below. </p>
-          <% end %>
         </div>
         <div class="panel-body">
-          <h4>Created by</h4>
+          <h5>Created by</h5>
         </div>
 
         <!-- trip user creator -->
@@ -214,11 +214,46 @@
             <div id="creator<%= trip.id %>" class="collapse">
               <p><strong>Name:</strong> <%= trip.user.name %></p>
               <p><strong>Email:</strong> <%= trip.user.email %></p>
-              <% if @status == false %>
+
               <p><strong>Phone: </strong>*********</p>
-              <% else %>
+
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </ul>
+      </div>
+    </div>
+    <% else %>
+    <div class="created-trips">
+      <div class="panel panel-default panel-primary accepted">
+
+        <!-- Trip details panel -->
+        <div class="panel-heading">Trip to <%= trip.destination %>, <%= trip.country_destination %></div>
+        <div class="panel-body">
+          <p><strong>Departing from:</strong> <%= trip.origin %></p>
+          <p><strong>Kind of trip:</strong> <%= trip.kind_of_trip %></p>
+          <p><strong>Departing:</strong> <%= trip.start_date %></p>
+          <p><strong>Coming back:</strong> <%= trip.finish_date %></p>
+          <p><strong>Empty seats:</strong> <%= trip.max_users %></p>
+          <p><strong>Board Space:</strong> <%= trip.space_material %></p>
+          <p><strong>Description:</strong> <%= trip.description %></p>
+          <br>
+          <h5><strong>Status:</strong> Accepted! You're going to <%= trip.destination %>. Please get in touch with <%= trip.user.name %>, his details are below. </h5>
+
+        </div>
+        <div class="panel-body">
+          <h5>Created by</h5>
+        </div>
+
+        <!-- trip user creator -->
+        <ul class="list-group">
+          <a class="list-group-item">
+            <strong><%= trip.user.name %></strong>
+            <button data-toggle="collapse" data-target="#creator<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
+            <div id="creator<%= trip.id %>" class="collapse">
+              <p><strong>Name:</strong> <%= trip.user.name %></p>
+              <p><strong>Email:</strong> <%= trip.user.email %></p>
               <p><strong>Phone:</strong> <%= trip.user.phone_number %></p>
-              <% end %>
             </div>
             <div class="clearfix"></div>
           </a>
@@ -226,7 +261,7 @@
       </div>
     </div>
     <% end %>
-
+    <% end %>
     <!-- If no trips requested -->
     <% else %>
     <div class="panel-body">
@@ -240,13 +275,23 @@
            <div class="box-content">
                <h3 class="tag-title">Requested Trips</h3>
                <hr />
-               <p>You will find the trips you have created to your left. If a user requests to join, you will be able to see his profile and request message below each trip. Once accepted, you will gain access to his phone number and email so you can get in touch! </p>
+               <p>Once confirmed, your requested trips will turn green, and you will be gain access to the driver's details. </p>
+               <p>Get in touch to finalize everything!</p>
                <br />
-               <a href="ppc.html" class="btn btn-block btn-default">Profile</a>
-               <a href="ppc.html" class="btn btn-block btn-default">Created Trips</a>
-               <a href="ppc.html" class="btn btn-block btn-primary">Requested Trips</a>
+               <a data-scroll href="#profile" class="btn btn-block btn-default">Profile</a>
+               <a data-scroll href="#created" class="btn btn-block btn-default">Created Trips</a>
+               <a class="btn btn-block btn-primary">Requested Trips</a>
            </div>
        </div>
   </div>
 </div>
 </div>
+
+<script>
+smoothScroll.init({
+    selector: '[data-scroll]',
+    speed: 1000, // Integer. How fast to complete the scroll in milliseconds
+    easing: 'easeInOutCubic', // Easing pattern to use
+    offset: 40, // Integer. How far to offset the scrolling anchor location in pixels
+});
+</script>

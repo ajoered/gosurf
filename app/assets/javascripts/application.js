@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_self
-//= require_tree .
+//= require bootstrap.min.js
+//= require smooth-scroll.min.js
+//= require cable.js
+// require_self
+// require_tree .

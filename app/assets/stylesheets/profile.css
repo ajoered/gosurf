@@ -93,3 +93,7 @@
   color:#515c66;
   text-transform:none;
 }
+
+.accepted {
+  background-color: rgb(234, 250, 234);
+}

@@ -2,9 +2,9 @@ var markerImageDestination = 'https://res.cloudinary.com/divgxbjh0/image/upload/
 var markerImageOrigin = 'https://res.cloudinary.com/drzsplf7y/image/upload/v1481712896/final_logo_white_hf14ex.png'
 var searchResult;
 
-$(document).on('ready', initialize);
+$(document).on('ready', initializeLanding);
 
-function initialize() {
+function initializeLanding() {
 	console.log("Landing initialize");
 	$('#search-button').on('click', fetchTrips);
 
@@ -252,8 +252,6 @@ function initMap(response) {
 
 	});
 }
-
-
 
 function handleError (error) {
     console.log(error);

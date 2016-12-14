@@ -1,6 +1,6 @@
-$(document).on('ready', initialize);
+$(document).on('ready', initializeCreate);
 
-function initialize() {
+function initializeCreate() {
   var originAutocomplete = createAutocomplete({//autocomplete for country of origin
     input: $('.js-search-origin'),
     output: $('.js-country-origin'),
