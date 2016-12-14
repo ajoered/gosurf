@@ -1,6 +1,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<%= javascript_include_tag '/assets/javascripts/create' %>
+<!-- <%= javascript_include_tag '/assets/javascripts/create' %> -->
 
 
   <div class="container-fluid">
@@ -16,7 +16,7 @@
 
         <div class="form-group">
       	  <%= f.label :origin %>
-      	  <%= f.text_field :origin, class: "js-search-origin form-control", onFocus: "geolocate()", type: "text"%>
+      	  <%= f.text_field :origin, class: "js-search-origin form-control", type: "text"%>
           <%= f.text_field :country_origin, class: "js-country-origin field form-control", disabled: "true"%>
         </div>
 
