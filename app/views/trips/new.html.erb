@@ -19,13 +19,13 @@
         <div class="form-group">
       	  <%= f.label :origin %>
       	  <%= f.text_field :origin, class: "js-search-origin form-control", type: "text"%>
-          <%= f.text_field :country_origin, class: "js-country-origin field form-control", disabled: "true"%>
+          <%= f.text_field :country_origin, class: "js-country-origin field form-control hidden", disabled: "true"%>
         </div>
 
         <div class="form-group">
           <%= f.label :destination %>
           <%= f.text_field :destination, class: "js-search-destination form-control" %>
-          <%= f.text_field :country_destination, class: "js-country-destination field form-control", disabled: "true"%>
+          <%= f.text_field :country_destination, class: "js-country-destination field form-control hidden", disabled: "true"%>
         </div>
 
         <div class="form-group">
@@ -38,17 +38,17 @@
           <%= f.date_field :finish_date, class: "form-control" %>
         </div>
 
+
+        <div class="form-group">
+          <%= f.label :price %>
+          <%= f.number_field :price, class: "form-control", placeholder: "Price/seat" %>
+        </div>
       </div>
 
       <div class="col-lg-4 create-form-2">
         <h3 class="text-center">2. Additional Info</h3>
           <p class="text-center">The more info the better!</p>
         <hr>
-
-          <div class="form-group">
-            <%= f.label :price %>
-            <%= f.number_field :price, class: "form-control", placeholder: "Price/seat" %>
-          </div>
 
           <div class="form-group">
             <%= f.label :level %>
@@ -99,3 +99,4 @@
       <% end %>
       </div>
     </div>
+<%= render "layouts/footer_fixed" %>

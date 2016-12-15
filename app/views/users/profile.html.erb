@@ -102,7 +102,7 @@
             </div>
             <!-- user request dropdown -->
             <div id="view<%=request.id%>" class="collapse">
-              <div class="clearfix"></div><br>
+              <br>
               <% if request.comment %>
               <p><strong>Message:</strong> <%= request.comment %></p>
               <% else %>
@@ -128,7 +128,7 @@
             </div>
             <!-- user request dropdown -->
             <div id="view<%=request.id%>" class="collapse">
-              <div class="clearfix"></div><br>
+              <br>
               <% if request.comment %>
               <p><strong>Message:</strong> <%= request.comment %></p>
               <% else %>
@@ -214,11 +214,10 @@
             <strong><%= trip.user.name %></strong>
             <button data-toggle="collapse" data-target="#creator<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
             <div id="creator<%= trip.id %>" class="collapse">
+              <br>
               <p><strong>Name:</strong> <%= trip.user.name %></p>
-              <p><strong>Email:</strong> <%= trip.user.email %></p>
-
+              <p><strong>Email:</strong> *********</p>
               <p><strong>Phone: </strong>*********</p>
-
             </div>
             <div class="clearfix"></div>
           </a>
@@ -253,6 +252,7 @@
             <strong><%= trip.user.name %></strong>
             <button data-toggle="collapse" data-target="#creator<%= trip.id %>" class="btn btn-success btn-sm pull-right btn-user">View profile</button>
             <div id="creator<%= trip.id %>" class="collapse">
+              <br>
               <p><strong>Name:</strong> <%= trip.user.name %></p>
               <p><strong>Email:</strong> <%= trip.user.email %></p>
               <p><strong>Phone:</strong> <%= trip.user.phone_number %></p>
@@ -297,3 +297,5 @@ smoothScroll.init({
     offset: 40, // Integer. How far to offset the scrolling anchor location in pixels
 });
 </script>
+
+<%= render "layouts/footer" %>

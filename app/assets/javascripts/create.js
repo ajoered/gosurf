@@ -2,11 +2,12 @@ $(document).on('ready', initializeCreate);
 
 function initializeCreate() {
   infoTrip();
+  $( ".find-trip" ).attr( 'href','/' )
 
   var originAutocomplete = createAutocomplete({//autocomplete for country of origin
     input: $('.js-search-origin'),
     output: $('.js-country-origin'),
-    getPlace: function (place) {  //returns the country for the input
+    getCountry: function (place) {  //returns the country for the input
       var country = "";
       place.address_components.forEach(function (address_component) {
         if (address_component.types[0].toLowerCase() === "country") {
@@ -20,9 +21,9 @@ function initializeCreate() {
   var destinationAutocomplete = createAutocomplete({ // autocomplete for country of destination
     input: $('.js-search-destination'),
     output: $('.js-country-destination'),
-    getPlace: function (place) { //returns the country for the input
+    getCountry: function (googleApiResponse) { //returns the country for the input
       var country = "";
-      place.address_components.forEach(function (address_component) {
+      googleApiResponse.address_components.forEach(function (address_component) {
         if (address_component.types[0].toLowerCase() === "country") {
           country = address_component["long_name"];
         }
@@ -37,13 +38,13 @@ function initializeCreate() {
 function createAutocomplete(options) {
   var input = options.input;
   var output = options.output;
-  var getPlace = options.getPlace;
+  var getCountry = options.getCountry;
   var autocomplete = new google.maps.places.Autocomplete(input[0], {
     types: ['geocode']
   });
   autocomplete.addListener('place_changed', function fillOutput() {
-    var place = autocomplete.getPlace();
-    output.val(getPlace(place));
+    var googleApiResponse = autocomplete.getPlace();
+    output.val(getCountry(googleApiResponse));
   });
 }
 
@@ -107,7 +108,7 @@ function infoTrip() {
 
 }
 
-function swalAlert() {
+function swalAlert(title, body) {
   swal(
       'Info!',
       'Lots and lots of info!!',

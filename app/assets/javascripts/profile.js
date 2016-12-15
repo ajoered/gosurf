@@ -2,6 +2,7 @@ $(document).on('ready', initializeProfile);
 
 function initializeProfile() {
 	$('.accept-button').on('click', acceptRequest);
+	$( ".find-trip" ).attr( 'href','/' )
 }
 
 function acceptRequest(event) {
