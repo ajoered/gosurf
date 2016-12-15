@@ -35,18 +35,23 @@ function createAutocomplete(options) {
     var googleApiResponse = autocomplete.getPlace();
     output.val(getCountry(googleApiResponse));
   });
-};place
+};
 
 function fetchTrips(event) {
 	console.log("Fetch trips");
 	event.preventDefault();
 	$('.map-area').css('visibility', 'visible');
-  var country = {country_origin: $('.js-country-trip').val()};
+
+	var search_info = {
+		country_origin: $('.js-country-trip').val(),
+		from_date: $('.js-from-date-trip').val(),
+		to_date: $('.js-to-date-trip').val()
+	}
 
   $.ajax({
     type: "POST",
     url: "/api/search",
-    data: country,
+    data: search_info,
     success: initMap,
     error: handleError
   });
@@ -70,14 +75,25 @@ function initMap(response) {
 	    }
 		});
 
-		swal({
-		  title: 'No trips here yet!',
-		  html: $('<div>')
-		    .addClass('some-class')
-		    .text('Want to create one?'),
-		  animation: false,
-		  customClass: 'animated tada'
-		})
+		if (tripsArray.status === 1) {
+			swal({
+			  title: 'No trips in ' + tripsArray.country + ' yet!',
+			  html: $('<div>')
+			    .addClass('some-class')
+			    .text('Someone has to be the first...'),
+			  animation: false,
+			  customClass: 'animated tada'
+			})
+		} else {
+			swal({
+				title: 'No trips here on these dates!',
+				html: $('<div>')
+					.addClass('some-class')
+					.text('Try searching for other dates'),
+				animation: false,
+				customClass: 'animated tada'
+			})
+		}
 	};
 
 	geocoder.geocode( {'address' : searchLocation}, function(results, status) {

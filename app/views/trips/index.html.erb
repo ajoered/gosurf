@@ -47,16 +47,21 @@
         <p class="text-faded"></p>
         <div class="search_form">
 
-          <!-- <%= text_field_tag :country, {}, class: 'form-control', id: 'country', placeholder: 'Enter Country' %> -->
-            <%= text_field :search, value = nil, class: "js-search-trip form-control", type: "text"%>
+
+          <input type="text" class="js-search-trip form-control">
+
+          <form class="form-inline">
+            <div class="form-group row">
+              <label>Departing Between</label>
+              <input type="date" class="js-from-date-trip form-control">
+              <input type="date" class="js-to-date-trip form-control">
+            </div>
+          </form>
+            <!-- <%= text_field :search, value = nil, class: "js-search-trip form-control", type: "text"%> -->
+            <!-- <%= date_field :from_date, value = nil, class: "js-from-date-trip form-control", placeholder: "Start Date"%> -->
+            <!-- <%= date_field :to_date, value = nil, class: "js-to-date-trip form-control", placeholder: "To date"%> -->
 
             <%= text_field :country_search, value = nil, class: "js-country-trip form-control hidden", disabled: "true"%>
-          <!-- <%= country_select(
-          "country",
-          { priority_countries: ["ES", "US"] },
-          { selected: "ES"},
-          { class: 'form-control', id: "country" }
-          ) %> -->
 
             <button data-scroll href="#map" type="button" class="page-scroll btn btn-default btn-xl search_button" id="search-button">Search</button>
 

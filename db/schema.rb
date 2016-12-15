@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212160821) do
+ActiveRecord::Schema.define(version: 20161215104401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20161212160821) do
     t.string   "kind_of_trip"
     t.string   "origin"
     t.string   "destination"
-    t.datetime "start_date"
-    t.datetime "finish_date"
+    t.date     "start_date"
+    t.date     "finish_date"
     t.integer  "max_users"
     t.integer  "space_material"
     t.string   "description"
