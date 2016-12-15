@@ -102,10 +102,6 @@ p {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 }
 
-/*section {
-  padding: 60px 0;
-}*/
-
 .section-heading {
   color: #f4f4f4;
 }
@@ -132,9 +128,6 @@ p {
 .navbar-footer {
   text-align: center;
   background-color: rgba(128, 128, 128, 0.3);
-  /*position: fixed;
-  bottom: 0px;
-  left: 0px;*/
   width: 100%;
   padding-right: 30px;
 }

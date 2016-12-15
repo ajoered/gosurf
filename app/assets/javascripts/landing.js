@@ -1,6 +1,5 @@
 var markerImageDestination = 'https://res.cloudinary.com/divgxbjh0/image/upload/v1481653467/logo_transparente_hsv4qb.png'
 var markerImageOrigin = 'https://res.cloudinary.com/drzsplf7y/image/upload/v1481805182/azul_h4qznj.png'
-var searchResult;
 
 $(document).on('ready', initializeLanding);
 
