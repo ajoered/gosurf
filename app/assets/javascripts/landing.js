@@ -172,7 +172,7 @@ function initMap(response) {
 					'<b>Price/seat: </b>' + trip.price + '<br>' +
 					'<b>Departing: </b>' + trip.start_date + '<br>' +
 					'<b>Coming back: </b>' + trip.finish_date + '<br>' +
-					'<b>Empty seats: </b>' + trip.max_users + '<br>' +
+					'<b>Empty seats: </b>' + trip.empty_seats + '<br>' +
 					'<b>Board Space: </b>' + trip.space_material + '<br>' + '<br>' +
 					'<b>Description: </b>' + trip.description + '<br>' +
 					'</div>' +

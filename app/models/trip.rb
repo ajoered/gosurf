@@ -17,14 +17,12 @@ class Trip < ApplicationRecord
   after_validation :geocode_the_destination
 
   def geocode_the_destination
-
     coords = Geocoder.coordinates(self.destination)
     self.destination_lat = coords[0]
     self.destination_lng = coords[1]
   end
 
   def geocode_the_origin
-
     coords = Geocoder.coordinates(self.origin)
     self.origin_lat = coords[0]
     self.origin_lng = coords[1]
@@ -41,6 +39,10 @@ class Trip < ApplicationRecord
 
   def same_user_request(user_id)
     (self.requests.where(user_id: user_id) === [])? false : true
+  end
+
+  def empty_seats
+    return (self.max_users - self.requests.where(status: true).length)
   end
 
 end

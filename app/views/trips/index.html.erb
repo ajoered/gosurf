@@ -24,11 +24,12 @@
                   <h3 class="animated bounceInLeft" id="uvp">We make it easy to go surfing.</h3>
                   <hr class="intro-divider">
                   <ul class="list-inline intro-social-buttons">
+                    <br>
                     <li>
-                      <a data-scroll href="#search-button" class="btn btn-default btn-lg find-trip">Find Trip</a>
+                      <a data-scroll href="#search-button" class="btn btn-default btn-lg find-trip custom-button">Find Trip</a>
                     </li>
                     <li>
-                      <a href="/trips/new" class="btn btn-default btn-lg">Create Trip</a>
+                      <a href="/trips/new" class="btn btn-default btn-lg custom-button">Create Trip</a>
                     </li>
                   </ul>
                 </div>
@@ -58,7 +59,7 @@
               <input type="date" class="js-from-date-trip form-control">
               <label>&</label>
               <input type="date" class="js-to-date-trip form-control">
-              <button data-scroll href="#map" type="button" class="page-scroll btn btn-default btn-xl search_button" id="search-button">Search</button>
+              <button data-scroll href="#map" type="button" class="page-scroll btn btn-default btn-xl " id="search-button">Search</button>
             </div>
           </form>
             <!-- <%= text_field :search, value = nil, class: "js-search-trip form-control", type: "text"%> -->
@@ -78,12 +79,13 @@
 
 <div id="map" class="map-area">
   <div class="container">
+    <br>
   <div class="page-header">
     <h2 class="text-center">There's hundreds of surf trips waiting for you to join...</h2>
       </div>
          <div class="box text-center">
              <div class="box-content">
-                  <h3></h3>
+                  <h1></h1>
                  <div class="col-md-4">
                   <h4>Flexi-Search</h4>
                   <hr>
@@ -119,7 +121,7 @@
     selector: '[data-scroll]',
     speed: 1000,
     easing: 'easeInOutCubic',
-    offset: 200
+    offset: 196
   });
 
 </script>

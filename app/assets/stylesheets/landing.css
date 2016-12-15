@@ -36,7 +36,7 @@ html, body {
 
 #search {
   background-color: #132038;
-  padding-top: 30px;
+  padding-top: 40px;
   padding-bottom: 50px;
 
 }
@@ -64,7 +64,7 @@ p {
   }
 
 #map {
-  height: 60vh;
+  height: 62vh;
   width: 100%;
 }
 
@@ -145,4 +145,8 @@ p {
   color: #ccc;
   margin:15px;
   border-color: #132038;
+}
+
+.custom-button {
+    width: 160px !important;
 }
