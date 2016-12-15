@@ -1,7 +1,3 @@
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwMfMENTf8PU8inF6lG48nSv3spe0g5-M&libraries=places">
-</script>
-
 <%= javascript_include_tag '/assets/landing' %>
 <%= javascript_include_tag '/assets/video' %>
 
@@ -62,14 +58,7 @@
               <button data-scroll href="#map" type="button" class="page-scroll btn btn-default btn-xl " id="search-button">Search</button>
             </div>
           </form>
-            <!-- <%= text_field :search, value = nil, class: "js-search-trip form-control", type: "text"%> -->
-            <!-- <%= date_field :from_date, value = nil, class: "js-from-date-trip form-control", placeholder: "Start Date"%> -->
-            <!-- <%= date_field :to_date, value = nil, class: "js-to-date-trip form-control", placeholder: "To date"%> -->
-
             <%= text_field :country_search, value = nil, class: "js-country-trip form-control hidden", disabled: "true"%>
-
-
-
         </div>
       </div>
     </div>
@@ -124,4 +113,8 @@
     offset: 196
   });
 
+</script>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwMfMENTf8PU8inF6lG48nSv3spe0g5-M&libraries=places">
 </script>

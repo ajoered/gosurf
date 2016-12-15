@@ -129,12 +129,12 @@ function initMap(response) {
 
 		var iconDestination = {
 	    url: markerImageDestination,
-	    scaledSize: new google.maps.Size(40, 40)
+	    scaledSize: new google.maps.Size(50, 40)
 	  };
 
 		var iconOrigin = {
 			url: markerImageOrigin,
-			scaledSize: new google.maps.Size(40, 40)
+			scaledSize: new google.maps.Size(50, 40)
 		};
 
 		var markerDestination = new google.maps.Marker({
