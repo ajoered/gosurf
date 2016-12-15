@@ -104,11 +104,13 @@
             <div id="view<%=request.id%>" class="collapse">
               <div class="clearfix"></div><br>
               <% if request.comment %>
-              <p><strong>Comments:</strong> <%= request.comment %></p>
+              <p><strong>Message:</strong> <%= request.comment %></p>
               <% else %>
-              <p><strong>No comments</strong></p>
+              <p><strong>No message</strong></p>
               <% end %>
-              <p><strong>Boards: <%= request.boards %></strong></p>
+
+              <p><strong>Email: *********</strong></p>
+              <p><strong>Phone: *********</strong></p>
             </div>
             <div class="clearfix"></div>
           </a>
@@ -128,12 +130,12 @@
             <div id="view<%=request.id%>" class="collapse">
               <div class="clearfix"></div><br>
               <% if request.comment %>
-              <p><strong>Comments:</strong> <%= request.comment %></p>
+              <p><strong>Message:</strong> <%= request.comment %></p>
               <% else %>
-              <p><strong>No comments</strong></p>
+              <p><strong>No message</strong></p>
               <% end %>
-              <p><strong>Boards: <%= request.boards %></strong></p>
               <p><strong>Email:</strong> <%= request.user.email %></p>
+              <p><strong>Phone: <%= request.user.phone_number %></strong></p>
             </div>
             <div class="clearfix"></div>
           </a>

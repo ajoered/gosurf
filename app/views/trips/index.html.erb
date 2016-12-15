@@ -41,20 +41,24 @@
 <section class="bg-primary" id="search">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 text-center">
+      <div class="col-lg-10 col-lg-offset-1 text-center">
         <h2 class="section-heading">Search for a trip</h2>
         <hr>
         <p class="text-faded"></p>
         <div class="search_form">
 
 
-          <input type="text" class="js-search-trip form-control">
+
 
           <form class="form-inline">
             <div class="form-group row">
-              <label>Departing Between</label>
+              <label>Location:</label>
+              <input type="text" class="js-search-trip form-control">
+              <label>Departing Between:</label>
               <input type="date" class="js-from-date-trip form-control">
+              <label>&</label>
               <input type="date" class="js-to-date-trip form-control">
+              <button data-scroll href="#map" type="button" class="page-scroll btn btn-default btn-xl search_button" id="search-button">Search</button>
             </div>
           </form>
             <!-- <%= text_field :search, value = nil, class: "js-search-trip form-control", type: "text"%> -->
@@ -63,7 +67,7 @@
 
             <%= text_field :country_search, value = nil, class: "js-country-trip form-control hidden", disabled: "true"%>
 
-            <button data-scroll href="#map" type="button" class="page-scroll btn btn-default btn-xl search_button" id="search-button">Search</button>
+
 
         </div>
       </div>
@@ -93,7 +97,7 @@
                 <div class="col-md-4">
                   <h4>Van-coded</h4>
                   <hr>
-                 <p style="float: left, padding-left: 30px;"><img src="https://res.cloudinary.com/divgxbjh0/image/upload/v1481653467/logo_transparente_hsv4qb.png" height="50px" width="60px" padding="10px">      Start Point</p>
+                 <p style="float: left, padding-left: 30px;"><img src="https://res.cloudinary.com/drzsplf7y/image/upload/v1481805182/azul_h4qznj.png" height="50px" width="60px" padding="10px">      Start Point</p>
                  <p><img src="https://res.cloudinary.com/divgxbjh0/image/upload/v1481653467/logo_transparente_hsv4qb.png" height="50px" width="60px"> Destination</p>
                 </div>
                 <div class="col-md-4">
@@ -115,7 +119,7 @@
     selector: '[data-scroll]',
     speed: 1000,
     easing: 'easeInOutCubic',
-    offset: 235
+    offset: 200
   });
 
 </script>

@@ -73,7 +73,6 @@ RSpec.describe Api::RequestsController, type: :controller do
         space_material: 3,
         description: "blablabla",
         price: 10)
-
       end
 
       it "Returns a 200 status" do
@@ -108,7 +107,6 @@ RSpec.describe Api::RequestsController, type: :controller do
         space_material: 3,
         description: "blablabla",
         price: 10)
-
       end
 
       it "Returns a 200 status" do
@@ -145,7 +143,6 @@ RSpec.describe Api::RequestsController, type: :controller do
         price: 10)
 
         request = @user.requests.create(trip_id: @already_requested_trip.id)
-
       end
 
       it "Returns a 200 status" do
@@ -163,19 +160,26 @@ RSpec.describe Api::RequestsController, type: :controller do
 
   describe "POST #approve" do
     before :each do
-      @request = Request.create(user_id: 1, trip_id: 1)
+      @user = User.create(name: "example8", email: "example8@email.com", password: "12345678", level: "Advanced", phone_number: 3108821488, bio: "Hey! My name is Miguel and I love to surf brah!")
+      @other_user = User.create(name: "Other10", email: "other10@email.com", password: "12345678", level: "Advanced", phone_number: 3108821488, bio: "Hey! My name is Miguel and I love to surf brah!")
+
+      @other_trip = @other_user.trips.create(
+      level: "Beginner",
+      kind_of_trip: "Group",
+      country_origin: "USA",
+      country_destination: "Spain",
+      origin: "Madrid",
+      destination: "Madrid",
+      start_date: "Fri, 16 Dec 2016 17:58:47 +0100",
+      finish_date: "Sun, 18 Dec 2016 17:58:47 +0100",
+      max_users: 4,
+      space_material: 3,
+      description: "blablabla",
+      price: 10)
+
+      @request = @user.requests.create(trip_id: @other_trip.id)
+      binding.pry
     end
 
-      it "Approves the request" do
-        post :approve, :params => {id: @request.id}
-        expect(response.status).to eq(200)
-      end
-
-      it "returns a JSON with Status 5" do
-        post :create, :params => {trip_id: @already_requested_trip.id}
-        expect(JSON.parse(response.body)["status"]).to eq(5)
-      end
-
+    end
   end
-
-end

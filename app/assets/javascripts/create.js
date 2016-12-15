@@ -1,6 +1,8 @@
 $(document).on('ready', initializeCreate);
 
 function initializeCreate() {
+  infoTrip();
+
   var originAutocomplete = createAutocomplete({//autocomplete for country of origin
     input: $('.js-search-origin'),
     output: $('.js-country-origin'),
@@ -93,3 +95,22 @@ function createTrip(event) {
   }
 
 }
+
+function infoTrip() {
+	$('.js-btn-info-origin').on('click', swalAlert);
+  $('.js-btn-info-dates').on('click', swalAlert);
+  $('.js-btn-info-price').on('click', swalAlert);
+  $('.js-btn-info-level').on('click', swalAlert);
+  $('.js-btn-info-kind').on('click', swalAlert);
+  $('.js-btn-info-max-users').on('click', swalAlert);
+  $('.js-btn-info-material').on('click', swalAlert);
+
+}
+
+function swalAlert() {
+  swal(
+      'Info!',
+      'Lots and lots of info!!',
+      'question'
+    );
+};
