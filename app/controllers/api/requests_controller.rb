@@ -28,7 +28,6 @@ class Api::RequestsController < ApplicationController
       end
     else
       render json: {status: 2}
-      @error = "You must be logged in to create a trip!"
     end
   end
 
