@@ -50,7 +50,7 @@ function createAutocomplete(options) {
 
 function createTrip(event) {
   event.preventDefault();
-  const inputs = Array.from(document.querySelectorAll('input'))
+  const inputs = Array.from(document.querySelectorAll('input'));
   const emptyInputs = inputs.filter(function(input) {
     return input.value === "";
   });

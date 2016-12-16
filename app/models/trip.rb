@@ -45,4 +45,8 @@ class Trip < ApplicationRecord
     return (self.max_users - self.requests.where(status: true).length)
   end
 
+  def as_json(options = {})
+    super(methods: [:empty_seats])
+  end
+
 end
