@@ -1,102 +1,96 @@
-<!-- # <%= javascript_include_tag '/assets/create' %> -->
+<div class="container-fluid">
+  <div class="row panel">
 
-  <div class="container-fluid">
-    <div class="row panel">
+    <%= form_for [@trip] do |f| %>
 
-      <%= form_for [@trip] do |f| %>
+    <div class="col-lg-4 create-form-1">
 
-      <div class="col-lg-4 create-form-1">
+      <h3 class="text-center">1. Basic Information</h3>
+      <p class="text-center">First tell us where and when...</p>
+      <hr>
 
-        <h3 class="text-center">1. Basic Information</h3>
-        <p class="text-center">First tell us where and when...</p>
-        <hr>
-
-        <div class="form-group">
-      	  <%= f.label :origin %>
-      	  <%= f.text_field :origin, class: "js-search-origin form-control", type: "text"%>
-          <%= f.text_field :country_origin, class: "js-country-origin field form-control hidden", disabled: "true"%>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :destination %>
-          <%= f.text_field :destination, class: "js-search-destination form-control" %>
-          <%= f.text_field :country_destination, class: "js-country-destination field form-control hidden", disabled: "true"%>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :start_date %>
-          <%= f.date_field :start_date, class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :finish_date %>
-          <%= f.date_field :finish_date, class: "form-control" %>
-        </div>
-
-
-        <div class="form-group">
-          <%= f.label :price %>
-          <%= f.number_field :price, class: "form-control", placeholder: "Price/seat" %>
-        </div>
+      <div class="form-group">
+        <%= f.label :origin %>
+        <%= f.text_field :origin, class: "js-search-origin form-control", type: "text"%>
+        <%= f.text_field :country_origin, class: "js-country-origin field form-control hidden", disabled: "true"%>
       </div>
 
-      <div class="col-lg-4 create-form-2">
-        <h3 class="text-center">2. Additional Info</h3>
-          <p class="text-center">The more info the better!</p>
-        <hr>
+      <div class="form-group">
+        <%= f.label :destination %>
+        <%= f.text_field :destination, class: "js-search-destination form-control" %>
+        <%= f.text_field :country_destination, class: "js-country-destination field form-control hidden", disabled: "true"%>
+      </div>
 
-          <div class="form-group">
-            <%= f.label :level %>
-            <%= f.select(:level, [['Beginner'], ['Intermediate'], ['Advanced'], ['Expert']],{}, { :class => 'form-control' } ) %>
-          </div>
+      <div class="form-group">
+        <%= f.label :start_date %>
+        <%= f.date_field :start_date, class: "form-control" %>
+      </div>
 
-          <div class="form-group">
-            <%= f.label :kind_of_trip %>
-            <%= f.select(:kind_of_trip, [['Group'], ['Riding Solo']], {}, { :class => 'form-control' } ) %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :max_users %>
-            <%= f.text_field :max_users, class: "form-control", placeholder: "How many people can you take?" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :space_material %>
-            <%= f.number_field :space_material, class: "form-control", placeholder: "How many boards can you take?" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :description %>
-            <%= f.text_field :description, class: "form-control", placeholder: "People love to hear about your trip... be as eloquent as possible!" %>
-          </div>
+      <div class="form-group">
+        <%= f.label :finish_date %>
+        <%= f.date_field :finish_date, class: "form-control" %>
+      </div>
 
 
-        </div>
-        <div class="col-lg-4 create-info">
-          <div class="box">
-              <div class="box-content">
-                  <h3 class="tag-title">Create a trip!</h3>
-                  <hr />
-                  <h4>More Info...</h4>
-                  <a class="btn btn-block btn-primary js-btn-info-origin">Origin/Destination</a>
-                  <a class="btn btn-block btn-default js-btn-info-dates">Dates</a>
-                  <a class="btn btn-block btn-default js-btn-info-price">Price</a>
-                  <a class="btn btn-block btn-default js-btn-info-level">Level</a>
-                  <a class="btn btn-block btn-default js-btn-info-kind">Kind of Trip</a>
-                  <a class="btn btn-block btn-default js-btn-info-max-users">Max Users</a>
-                  <a class="btn btn-block btn-default js-btn-info-material">Space for material</a>
-                  <br />
-              </div>
-          </div>
-                  <button type="button" class="btn btn-success btn-lg btn-create" id="create-trip-btn">Create a trip!</button>
-        </div>
-
-      <% end %>
+      <div class="form-group">
+        <%= f.label :price %>
+        <%= f.number_field :price, class: "form-control", placeholder: "Price/seat" %>
       </div>
     </div>
-<%= render "layouts/footer_fixed" %>
 
-<!-- <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwMfMENTf8PU8inF6lG48nSv3spe0g5-M&libraries=places">
-</script> -->
+    <div class="col-lg-4 create-form-2">
+      <h3 class="text-center">2. Additional Info</h3>
+      <p class="text-center">The more info the better!</p>
+      <hr>
+
+      <div class="form-group">
+        <%= f.label :level %>
+        <%= f.select(:level, [['Beginner'], ['Intermediate'], ['Advanced'], ['Expert']],{}, { :class => 'form-control' } ) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :kind_of_trip %>
+        <%= f.select(:kind_of_trip, [['Group'], ['Riding Solo']], {}, { :class => 'form-control' } ) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :max_users %>
+        <%= f.text_field :max_users, class: "form-control", placeholder: "How many people can you take?" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :space_material %>
+        <%= f.number_field :space_material, class: "form-control", placeholder: "How many boards can you take?" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: "form-control", placeholder: "People love to hear about your trip... be as eloquent as possible!" %>
+      </div>
+
+
+    </div>
+    <div class="col-lg-4 create-info">
+      <div class="box">
+        <div class="box-content">
+          <h3 class="tag-title">Create a trip!</h3>
+          <hr />
+          <h4>More Info...</h4>
+          <a class="btn btn-block btn-primary js-btn-info-origin">Origin/Destination</a>
+          <a class="btn btn-block btn-default js-btn-info-dates">Dates</a>
+          <a class="btn btn-block btn-default js-btn-info-price">Price</a>
+          <a class="btn btn-block btn-default js-btn-info-level">Level</a>
+          <a class="btn btn-block btn-default js-btn-info-kind">Kind of Trip</a>
+          <a class="btn btn-block btn-default js-btn-info-max-users">Max Users</a>
+          <a class="btn btn-block btn-default js-btn-info-material">Space for material</a>
+          <br />
+        </div>
+      </div>
+      <button type="button" class="btn btn-success btn-lg btn-create" id="create-trip-btn">Create a trip!</button>
+    </div>
+
+    <% end %>
+  </div>
+</div>
+<%= render "layouts/footer_fixed" %>
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
