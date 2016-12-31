@@ -2,7 +2,7 @@ $(document).on('ready', initializeCreate);
 
 function initializeCreate() {
   infoTrip();
-  $( ".find-trip" ).attr( 'href','/' )
+  // $( ".find-trip" ).attr( 'href','/' )
 
   var originAutocomplete = createAutocomplete({//autocomplete for country of origin
     input: $('.js-search-origin'),
