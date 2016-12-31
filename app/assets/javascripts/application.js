@@ -15,5 +15,5 @@
 //= require bootstrap.min.js
 //= require smooth-scroll.min.js
 //= require cable.js
-// require_self
-// require_tree .
+//= require_self
+//= require_tree .
